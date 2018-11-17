@@ -62,6 +62,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RowingRaceTimerDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

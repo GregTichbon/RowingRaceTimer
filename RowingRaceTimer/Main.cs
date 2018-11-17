@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace RowingRaceTimer
 {
     public partial class Main : Form
     {
+        public string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\toh-dc\RedirectedFolders$\gtichbon\My Documents\Visual Studio 2017\Projects\RowingRaceTimer\RowingRaceTimer\RowingRaceTimer.accdb";
+
         public Main()
         {
             InitializeComponent();
@@ -22,41 +25,128 @@ namespace RowingRaceTimer
 
         private void Main_Load(object sender, EventArgs e)
         {
-       
-           
+            // TODO: This line of code loads data into the 'rowingRaceTimerDataSet1.RaceCrews' table. You can move, or remove it, as needed.
+            this.raceCrewsTableAdapter1.Fill(this.rowingRaceTimerDataSet1.RaceCrews);
+            // TODO: This line of code loads data into the 'rowingRaceTimerDataSet.RaceCrews' table. You can move, or remove it, as needed.
+            //this.raceCrewsTableAdapter.Fill(this.rowingRaceTimerDataSet.RaceCrews);
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "select * from [starttime] order by [starttime]";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    dg_starttime.Rows.Add(dataReader["starttime_id"], Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), dataReader["crew_id"]);
+                    int newrow = dg_starttime.Rows.Count - 2;
+                    dg_starttime.Rows[newrow].Cells[2].ReadOnly = false;
+                }
+            }
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "select * from [finishtime] order by [finishtime]";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    dg_endtime.Rows.Add(dataReader["finishtime_id"], Convert.ToDateTime(dataReader["finishtime"]).ToString("HH:mm:ss.ff"), dataReader["crew_id"]);
+                    int newrow = dg_endtime.Rows.Count - 2;
+                    dg_endtime.Rows[newrow].Cells[2].ReadOnly = false;
+                }
+            }
+
+            /*
+             *using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+      {
+
+          DataGridViewComboBoxColumn comboBoxstart = (DataGridViewComboBoxColumn)dg_starttime.Rows[0].Cells[2].OwningColumn;
+          DataGridViewComboBoxColumn comboBoxfinsih = (DataGridViewComboBoxColumn)dg_endtime.Rows[0].Cells[2].OwningColumn;
+
+          connection.Open();
+          string queryString = "select crew_id, boatnumber, crewname from crew order by boatnumber";
+
+          OleDbCommand command = new OleDbCommand(queryString, connection);
+          command.CommandType = CommandType.Text;
+          OleDbDataReader dataReader = command.ExecuteReader();
+          while (dataReader.Read())
+          {
+              //comboBoxfinsih.Items.
+              comboBoxstart.Items.Add(dataReader["crew_id"]);
+              comboBoxfinsih.Items.Add(dataReader["crewname"]);
+          }
+
+      }
+      */
+
+
         }
 
         private void btn_StartTime_Click(object sender, EventArgs e)
         {
-            recordstart();
+            recordtime(dg_starttime, 0, "starttime");
         }
 
-        public void recordstart()
+        public void recordtime(DataGridView myGrid, int myTab, string myName)
         {
-            //Write into database
-            dg_starttime.Rows.Add(DateTime.Now.ToString("HH:mm:ss:ffff"));
-            tabControl.SelectedIndex = 0;
+
+            timer1.Stop();
+            //string starttime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            DateTime dt_starttime = Convert.ToDateTime(lbl_Timer.Tag);
+            //DateTime dt_starttime = Convert.ToDateTime(starttime);
+            myGrid.Rows.Add(0, dt_starttime.ToString("HH:mm:ss.ff"));
+            timer1.Start();
+
+
+            int id = 0;
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "Insert into [" + myName + "] ([" + myName + "]) values (?)";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.Parameters.Add("@Date", OleDbType.Date);
+                command.Parameters[0].Value = dt_starttime;
+
+                command.CommandType = CommandType.Text;
+                command.ExecuteNonQuery();
+                command.CommandText = "Select @@Identity";
+                id = (int)command.ExecuteScalar();
+
+                //MessageBox.Show(id.ToString());
+            }
+
+            tabControl.SelectedIndex = myTab;
+
+            int newrow = myGrid.Rows.Count -2;
+            myGrid.Rows[newrow].Cells[0].Value = id;
+            myGrid.Rows[newrow].Cells[2].ReadOnly = false;
+
         }
 
         private void btn_end_Click(object sender, EventArgs e)
         {
-            recordend();
+            recordtime(dg_endtime, 1, "finishtime");
         }
-        public void recordend()
-        {
-            //Write into database
-            dg_endtime.Rows.Add(DateTime.Now.ToString("HH:mm:ss:ffff"));
-            tabControl.SelectedIndex = 1;
-        }
+        
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lbl_Timer.Text = DateTime.Now.ToString("HH:mm:ss:ffff");
+            DateTime now = DateTime.Now;
+            lbl_Timer.Tag = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff");
+            lbl_Timer.Text = now.ToString("HH:mm:ss:ff");
         }
 
         private void btn_MaintToggle_Click(object sender, EventArgs e)
         {
-            if(btn_MaintToggle.Text == "Allow Maintenance")
+            if (btn_MaintToggle.Text == "Allow Maintenance")
             {
                 dg_starttime.AllowUserToAddRows = true;
                 dg_starttime.AllowUserToDeleteRows = true;
@@ -109,12 +199,12 @@ namespace RowingRaceTimer
                 {
                     case 1:
                         {
-                            recordstart();
+                            recordtime(dg_starttime,0, "starttime");
                             break;
                         }
                     case 2:
                         {
-                            recordend();
+                            recordtime(dg_endtime, 1, "finishtime");
                             break;
                         }
                 }
@@ -128,5 +218,82 @@ namespace RowingRaceTimer
         }
 
 
+       
+
+        private void dg_starttime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                //int crew_id = Convert.ToInt16(dg_starttime.Rows[e.RowIndex].Cells[2].Value);
+                string crew_id = dg_starttime.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+                //int starttime_id = Convert.ToInt16(dg_starttime.Rows[e.RowIndex].Cells[0].Value) ?? 0;
+                string starttime_id = dg_starttime.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (crew_id != "" && starttime_id != "")
+                {
+                    using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                    {
+                        connection.Open();
+                        string queryString = "update [starttime] set crew_ID = ? where starttime_id = ?";
+                        OleDbCommand command = new OleDbCommand(queryString, connection);
+                        command.Parameters.Add("@crew_id", OleDbType.BigInt);
+                        command.Parameters[0].Value = crew_id;
+
+                        command.Parameters.Add("@starttime_id", OleDbType.BigInt);
+                        command.Parameters[1].Value = starttime_id;
+
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+
+        }
+
+        private void dg_starttime_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_loadresults_Click(object sender, EventArgs e)
+        {
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "SELECT StartTime.StartTime, FinishTime.FinishTime, Right(\"0\" & [Boatnumber],2) & \" \" & [Club].[code]+\" \"+[crewname] AS Crew, Crew.Prognostic " +
+                                     "FROM Club INNER JOIN(FinishTime INNER JOIN (StartTime INNER JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID) ON FinishTime.Crew_ID = StartTime.Crew_ID) ON Club.Club_ID = Crew.Club_ID";
+
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    DateTime startdate = (DateTime)dataReader["starttime"];
+                    DateTime finishtime = (DateTime)dataReader["finishtime"];
+                    double prognostic = (double)dataReader["prognostic"];
+                    double totalprognostic = prognostic * 10;
+
+                    TimeSpan span = (finishtime - startdate);
+
+
+                    //string difference = span.Hours.ToString("HH");
+                    string difference = span.ToString().Substring(3,8);
+                    double seconds = span.TotalMilliseconds / 1000;
+
+                    double score =  Math.Round( totalprognostic / seconds * 100,2);
+
+                    dg_results.Rows.Add(dataReader["crew"], Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), Convert.ToDateTime(dataReader["finishtime"]).ToString("HH:mm:ss.ff"),difference,prognostic,score);
+                    //int newrow = dg_starttime.Rows.Count - 2;
+                    //dg_starttime.Rows[newrow].Cells[2].ReadOnly = false;
+                }
+            }
+        }
     }
 }

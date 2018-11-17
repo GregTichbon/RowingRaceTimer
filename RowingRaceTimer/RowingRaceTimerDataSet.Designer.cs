@@ -24,7 +24,7 @@ namespace RowingRaceTimer {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class RowingRaceTimerDataSet : global::System.Data.DataSet {
         
-        private CrewDataTable tableCrew;
+        private RaceCrewsDataTable tableRaceCrews;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +54,8 @@ namespace RowingRaceTimer {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Crew"] != null)) {
-                    base.Tables.Add(new CrewDataTable(ds.Tables["Crew"]));
+                if ((ds.Tables["RaceCrews"] != null)) {
+                    base.Tables.Add(new RaceCrewsDataTable(ds.Tables["RaceCrews"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace RowingRaceTimer {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CrewDataTable Crew {
+        public RaceCrewsDataTable RaceCrews {
             get {
-                return this.tableCrew;
+                return this.tableRaceCrews;
             }
         }
         
@@ -152,8 +152,8 @@ namespace RowingRaceTimer {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Crew"] != null)) {
-                    base.Tables.Add(new CrewDataTable(ds.Tables["Crew"]));
+                if ((ds.Tables["RaceCrews"] != null)) {
+                    base.Tables.Add(new RaceCrewsDataTable(ds.Tables["RaceCrews"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace RowingRaceTimer {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableCrew = ((CrewDataTable)(base.Tables["Crew"]));
+            this.tableRaceCrews = ((RaceCrewsDataTable)(base.Tables["RaceCrews"]));
             if ((initTable == true)) {
-                if ((this.tableCrew != null)) {
-                    this.tableCrew.InitVars();
+                if ((this.tableRaceCrews != null)) {
+                    this.tableRaceCrews.InitVars();
                 }
             }
         }
@@ -204,13 +204,13 @@ namespace RowingRaceTimer {
             this.Namespace = "http://tempuri.org/RowingRaceTimerDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableCrew = new CrewDataTable();
-            base.Tables.Add(this.tableCrew);
+            this.tableRaceCrews = new RaceCrewsDataTable();
+            base.Tables.Add(this.tableRaceCrews);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeCrew() {
+        private bool ShouldSerializeRaceCrews() {
             return false;
         }
         
@@ -270,29 +270,23 @@ namespace RowingRaceTimer {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void CrewRowChangeEventHandler(object sender, CrewRowChangeEvent e);
+        public delegate void RaceCrewsRowChangeEventHandler(object sender, RaceCrewsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CrewDataTable : global::System.Data.TypedTableBase<CrewRow> {
+        public partial class RaceCrewsDataTable : global::System.Data.TypedTableBase<RaceCrewsRow> {
             
             private global::System.Data.DataColumn columnCrew_ID;
             
-            private global::System.Data.DataColumn columnClub_ID;
-            
-            private global::System.Data.DataColumn columnCrewName;
-            
-            private global::System.Data.DataColumn columnPrognostic;
-            
-            private global::System.Data.DataColumn columnBoatNumber;
+            private global::System.Data.DataColumn columnCrew;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewDataTable() {
-                this.TableName = "Crew";
+            public RaceCrewsDataTable() {
+                this.TableName = "RaceCrews";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -300,7 +294,7 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal CrewDataTable(global::System.Data.DataTable table) {
+            internal RaceCrewsDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -317,7 +311,7 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected CrewDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected RaceCrewsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -332,33 +326,9 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn Club_IDColumn {
+            public global::System.Data.DataColumn CrewColumn {
                 get {
-                    return this.columnClub_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn CrewNameColumn {
-                get {
-                    return this.columnCrewName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn PrognosticColumn {
-                get {
-                    return this.columnPrognostic;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn BoatNumberColumn {
-                get {
-                    return this.columnBoatNumber;
+                    return this.columnCrew;
                 }
             }
             
@@ -373,56 +343,53 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRow this[int index] {
+            public RaceCrewsRow this[int index] {
                 get {
-                    return ((CrewRow)(this.Rows[index]));
+                    return ((RaceCrewsRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CrewRowChangeEventHandler CrewRowChanging;
+            public event RaceCrewsRowChangeEventHandler RaceCrewsRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CrewRowChangeEventHandler CrewRowChanged;
+            public event RaceCrewsRowChangeEventHandler RaceCrewsRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CrewRowChangeEventHandler CrewRowDeleting;
+            public event RaceCrewsRowChangeEventHandler RaceCrewsRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CrewRowChangeEventHandler CrewRowDeleted;
+            public event RaceCrewsRowChangeEventHandler RaceCrewsRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddCrewRow(CrewRow row) {
+            public void AddRaceCrewsRow(RaceCrewsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRow AddCrewRow(int Club_ID, string CrewName, short Prognostic, short BoatNumber) {
-                CrewRow rowCrewRow = ((CrewRow)(this.NewRow()));
+            public RaceCrewsRow AddRaceCrewsRow(string Crew) {
+                RaceCrewsRow rowRaceCrewsRow = ((RaceCrewsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        Club_ID,
-                        CrewName,
-                        Prognostic,
-                        BoatNumber};
-                rowCrewRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCrewRow);
-                return rowCrewRow;
+                        Crew};
+                rowRaceCrewsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRaceCrewsRow);
+                return rowRaceCrewsRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRow FindByCrew_ID(int Crew_ID) {
-                return ((CrewRow)(this.Rows.Find(new object[] {
+            public RaceCrewsRow FindByCrew_ID(int Crew_ID) {
+                return ((RaceCrewsRow)(this.Rows.Find(new object[] {
                             Crew_ID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                CrewDataTable cln = ((CrewDataTable)(base.Clone()));
+                RaceCrewsDataTable cln = ((RaceCrewsDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -430,17 +397,14 @@ namespace RowingRaceTimer {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new CrewDataTable();
+                return new RaceCrewsDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnCrew_ID = base.Columns["Crew_ID"];
-                this.columnClub_ID = base.Columns["Club_ID"];
-                this.columnCrewName = base.Columns["CrewName"];
-                this.columnPrognostic = base.Columns["Prognostic"];
-                this.columnBoatNumber = base.Columns["BoatNumber"];
+                this.columnCrew = base.Columns["Crew"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -448,14 +412,8 @@ namespace RowingRaceTimer {
             private void InitClass() {
                 this.columnCrew_ID = new global::System.Data.DataColumn("Crew_ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCrew_ID);
-                this.columnClub_ID = new global::System.Data.DataColumn("Club_ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnClub_ID);
-                this.columnCrewName = new global::System.Data.DataColumn("CrewName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCrewName);
-                this.columnPrognostic = new global::System.Data.DataColumn("Prognostic", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPrognostic);
-                this.columnBoatNumber = new global::System.Data.DataColumn("BoatNumber", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnBoatNumber);
+                this.columnCrew = new global::System.Data.DataColumn("Crew", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCrew);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnCrew_ID}, true));
                 this.columnCrew_ID.AutoIncrement = true;
@@ -463,33 +421,34 @@ namespace RowingRaceTimer {
                 this.columnCrew_ID.AutoIncrementStep = -1;
                 this.columnCrew_ID.AllowDBNull = false;
                 this.columnCrew_ID.Unique = true;
-                this.columnCrewName.MaxLength = 255;
+                this.columnCrew.ReadOnly = true;
+                this.columnCrew.MaxLength = 536870910;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRow NewCrewRow() {
-                return ((CrewRow)(this.NewRow()));
+            public RaceCrewsRow NewRaceCrewsRow() {
+                return ((RaceCrewsRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CrewRow(builder);
+                return new RaceCrewsRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(CrewRow);
+                return typeof(RaceCrewsRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.CrewRowChanged != null)) {
-                    this.CrewRowChanged(this, new CrewRowChangeEvent(((CrewRow)(e.Row)), e.Action));
+                if ((this.RaceCrewsRowChanged != null)) {
+                    this.RaceCrewsRowChanged(this, new RaceCrewsRowChangeEvent(((RaceCrewsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -497,8 +456,8 @@ namespace RowingRaceTimer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.CrewRowChanging != null)) {
-                    this.CrewRowChanging(this, new CrewRowChangeEvent(((CrewRow)(e.Row)), e.Action));
+                if ((this.RaceCrewsRowChanging != null)) {
+                    this.RaceCrewsRowChanging(this, new RaceCrewsRowChangeEvent(((RaceCrewsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -506,8 +465,8 @@ namespace RowingRaceTimer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.CrewRowDeleted != null)) {
-                    this.CrewRowDeleted(this, new CrewRowChangeEvent(((CrewRow)(e.Row)), e.Action));
+                if ((this.RaceCrewsRowDeleted != null)) {
+                    this.RaceCrewsRowDeleted(this, new RaceCrewsRowChangeEvent(((RaceCrewsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -515,14 +474,14 @@ namespace RowingRaceTimer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.CrewRowDeleting != null)) {
-                    this.CrewRowDeleting(this, new CrewRowChangeEvent(((CrewRow)(e.Row)), e.Action));
+                if ((this.RaceCrewsRowDeleting != null)) {
+                    this.RaceCrewsRowDeleting(this, new RaceCrewsRowChangeEvent(((RaceCrewsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveCrewRow(CrewRow row) {
+            public void RemoveRaceCrewsRow(RaceCrewsRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -549,7 +508,7 @@ namespace RowingRaceTimer {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CrewDataTable";
+                attribute2.FixedValue = "RaceCrewsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -593,138 +552,54 @@ namespace RowingRaceTimer {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class CrewRow : global::System.Data.DataRow {
+        public partial class RaceCrewsRow : global::System.Data.DataRow {
             
-            private CrewDataTable tableCrew;
+            private RaceCrewsDataTable tableRaceCrews;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal CrewRow(global::System.Data.DataRowBuilder rb) : 
+            internal RaceCrewsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableCrew = ((CrewDataTable)(this.Table));
+                this.tableRaceCrews = ((RaceCrewsDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int Crew_ID {
                 get {
-                    return ((int)(this[this.tableCrew.Crew_IDColumn]));
+                    return ((int)(this[this.tableRaceCrews.Crew_IDColumn]));
                 }
                 set {
-                    this[this.tableCrew.Crew_IDColumn] = value;
+                    this[this.tableRaceCrews.Crew_IDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int Club_ID {
+            public string Crew {
                 get {
                     try {
-                        return ((int)(this[this.tableCrew.Club_IDColumn]));
+                        return ((string)(this[this.tableRaceCrews.CrewColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Club_ID\' in table \'Crew\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Crew\' in table \'RaceCrews\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCrew.Club_IDColumn] = value;
+                    this[this.tableRaceCrews.CrewColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string CrewName {
-                get {
-                    try {
-                        return ((string)(this[this.tableCrew.CrewNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CrewName\' in table \'Crew\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCrew.CrewNameColumn] = value;
-                }
+            public bool IsCrewNull() {
+                return this.IsNull(this.tableRaceCrews.CrewColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public short Prognostic {
-                get {
-                    try {
-                        return ((short)(this[this.tableCrew.PrognosticColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Prognostic\' in table \'Crew\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCrew.PrognosticColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public short BoatNumber {
-                get {
-                    try {
-                        return ((short)(this[this.tableCrew.BoatNumberColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'BoatNumber\' in table \'Crew\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCrew.BoatNumberColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsClub_IDNull() {
-                return this.IsNull(this.tableCrew.Club_IDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetClub_IDNull() {
-                this[this.tableCrew.Club_IDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsCrewNameNull() {
-                return this.IsNull(this.tableCrew.CrewNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetCrewNameNull() {
-                this[this.tableCrew.CrewNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsPrognosticNull() {
-                return this.IsNull(this.tableCrew.PrognosticColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetPrognosticNull() {
-                this[this.tableCrew.PrognosticColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsBoatNumberNull() {
-                return this.IsNull(this.tableCrew.BoatNumberColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetBoatNumberNull() {
-                this[this.tableCrew.BoatNumberColumn] = global::System.Convert.DBNull;
+            public void SetCrewNull() {
+                this[this.tableRaceCrews.CrewColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -732,22 +607,22 @@ namespace RowingRaceTimer {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class CrewRowChangeEvent : global::System.EventArgs {
+        public class RaceCrewsRowChangeEvent : global::System.EventArgs {
             
-            private CrewRow eventRow;
+            private RaceCrewsRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRowChangeEvent(CrewRow row, global::System.Data.DataRowAction action) {
+            public RaceCrewsRowChangeEvent(RaceCrewsRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRow Row {
+            public RaceCrewsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -775,7 +650,7 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CrewTableAdapter : global::System.ComponentModel.Component {
+    public partial class RaceCrewsTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.OleDb.OleDbDataAdapter _adapter;
         
@@ -789,7 +664,7 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public CrewTableAdapter() {
+        public RaceCrewsTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -886,52 +761,10 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Crew";
+            tableMapping.DataSetTable = "RaceCrews";
             tableMapping.ColumnMappings.Add("Crew_ID", "Crew_ID");
-            tableMapping.ColumnMappings.Add("Club_ID", "Club_ID");
-            tableMapping.ColumnMappings.Add("CrewName", "CrewName");
-            tableMapping.ColumnMappings.Add("Prognostic", "Prognostic");
-            tableMapping.ColumnMappings.Add("BoatNumber", "BoatNumber");
+            tableMapping.ColumnMappings.Add("Crew", "Crew");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Crew` WHERE ((`Crew_ID` = ?) AND ((? = 1 AND `Club_ID` IS NULL) OR (`Club_ID` = ?)) AND ((? = 1 AND `CrewName` IS NULL) OR (`CrewName` = ?)) AND ((? = 1 AND `Prognostic` IS NULL) OR (`Prognostic` = ?)) AND ((? = 1 AND `BoatNumber` IS NULL) OR (`BoatNumber` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Crew_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Crew_ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Club_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Club_ID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Club_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Club_ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_CrewName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CrewName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_CrewName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CrewName", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Prognostic", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Prognostic", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Prognostic", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Prognostic", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BoatNumber", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BoatNumber", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BoatNumber", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BoatNumber", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Crew` (`Club_ID`, `CrewName`, `Prognostic`, `BoatNumber`) VALUES (?," +
-                " ?, ?, ?)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Club_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Club_ID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("CrewName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CrewName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Prognostic", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Prognostic", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BoatNumber", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BoatNumber", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `Crew` SET `Club_ID` = ?, `CrewName` = ?, `Prognostic` = ?, `BoatNumber` = ? WHERE ((`Crew_ID` = ?) AND ((? = 1 AND `Club_ID` IS NULL) OR (`Club_ID` = ?)) AND ((? = 1 AND `CrewName` IS NULL) OR (`CrewName` = ?)) AND ((? = 1 AND `Prognostic` IS NULL) OR (`Prognostic` = ?)) AND ((? = 1 AND `BoatNumber` IS NULL) OR (`BoatNumber` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Club_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Club_ID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("CrewName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CrewName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Prognostic", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Prognostic", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BoatNumber", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BoatNumber", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Crew_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Crew_ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Club_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Club_ID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Club_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Club_ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_CrewName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CrewName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_CrewName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CrewName", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Prognostic", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Prognostic", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Prognostic", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Prognostic", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BoatNumber", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BoatNumber", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BoatNumber", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BoatNumber", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -947,7 +780,7 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Crew_ID, Club_ID, CrewName, Prognostic, BoatNumber FROM Crew";
+            this._commandCollection[0].CommandText = "SELECT Crew_ID, Crew FROM RaceCrews";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -955,7 +788,7 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RowingRaceTimerDataSet.CrewDataTable dataTable) {
+        public virtual int Fill(RowingRaceTimerDataSet.RaceCrewsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -968,215 +801,11 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RowingRaceTimerDataSet.CrewDataTable GetData() {
+        public virtual RowingRaceTimerDataSet.RaceCrewsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            RowingRaceTimerDataSet.CrewDataTable dataTable = new RowingRaceTimerDataSet.CrewDataTable();
+            RowingRaceTimerDataSet.RaceCrewsDataTable dataTable = new RowingRaceTimerDataSet.RaceCrewsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RowingRaceTimerDataSet.CrewDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RowingRaceTimerDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Crew");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Crew_ID, global::System.Nullable<int> Original_Club_ID, string Original_CrewName, global::System.Nullable<short> Original_Prognostic, global::System.Nullable<short> Original_BoatNumber) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Crew_ID));
-            if ((Original_Club_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_Club_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CrewName == null)) {
-                throw new global::System.ArgumentNullException("Original_CrewName");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_CrewName));
-            }
-            if ((Original_Prognostic.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((short)(Original_Prognostic.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_BoatNumber.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((short)(Original_BoatNumber.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> Club_ID, string CrewName, global::System.Nullable<short> Prognostic, global::System.Nullable<short> BoatNumber) {
-            if ((Club_ID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Club_ID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((CrewName == null)) {
-                throw new global::System.ArgumentNullException("CrewName");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(CrewName));
-            }
-            if ((Prognostic.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((short)(Prognostic.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((BoatNumber.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((short)(BoatNumber.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> Club_ID, string CrewName, global::System.Nullable<short> Prognostic, global::System.Nullable<short> BoatNumber, int Original_Crew_ID, global::System.Nullable<int> Original_Club_ID, string Original_CrewName, global::System.Nullable<short> Original_Prognostic, global::System.Nullable<short> Original_BoatNumber) {
-            if ((Club_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Club_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((CrewName == null)) {
-                throw new global::System.ArgumentNullException("CrewName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(CrewName));
-            }
-            if ((Prognostic.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((short)(Prognostic.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((BoatNumber.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(BoatNumber.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Crew_ID));
-            if ((Original_Club_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_Club_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CrewName == null)) {
-                throw new global::System.ArgumentNullException("Original_CrewName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_CrewName));
-            }
-            if ((Original_Prognostic.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((short)(Original_Prognostic.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_BoatNumber.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((short)(Original_BoatNumber.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
         }
     }
     
@@ -1192,8 +821,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
-        private CrewTableAdapter _crewTableAdapter;
-        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -1206,20 +833,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             }
             set {
                 this._updateOrder = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
-        public CrewTableAdapter CrewTableAdapter {
-            get {
-                return this._crewTableAdapter;
-            }
-            set {
-                this._crewTableAdapter = value;
             }
         }
         
@@ -1242,10 +855,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._crewTableAdapter != null) 
-                            && (this._crewTableAdapter.Connection != null))) {
-                    return this._crewTableAdapter.Connection;
-                }
                 return null;
             }
             set {
@@ -1259,9 +868,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._crewTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 return count;
             }
         }
@@ -1273,15 +879,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateUpdatedRows(RowingRaceTimerDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._crewTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Crew.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._crewTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -1292,14 +889,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateInsertedRows(RowingRaceTimerDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._crewTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Crew.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._crewTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -1310,14 +899,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateDeletedRows(RowingRaceTimerDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._crewTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Crew.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._crewTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             return result;
         }
         
@@ -1357,11 +938,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._crewTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._crewTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -1394,15 +970,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._crewTableAdapter != null)) {
-                    revertConnections.Add(this._crewTableAdapter, this._crewTableAdapter.Connection);
-                    this._crewTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._crewTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
-                    if (this._crewTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._crewTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._crewTableAdapter.Adapter);
-                    }
-                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -1460,10 +1027,6 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
-                }
-                if ((this._crewTableAdapter != null)) {
-                    this._crewTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._crewTableAdapter]));
-                    this._crewTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
