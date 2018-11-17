@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_StartTime = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lbl_Timer = new System.Windows.Forms.Label();
@@ -55,11 +62,13 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.CrewName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prognostic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Expected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FinishTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeTaken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prognostic = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_exportcsv = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_starttime)).BeginInit();
@@ -200,6 +209,7 @@
             // 
             // tabPageResults
             // 
+            this.tabPageResults.Controls.Add(this.btn_exportcsv);
             this.tabPageResults.Controls.Add(this.btn_loadresults);
             this.tabPageResults.Controls.Add(this.dg_results);
             this.tabPageResults.Location = new System.Drawing.Point(4, 33);
@@ -212,9 +222,9 @@
             // 
             // btn_loadresults
             // 
-            this.btn_loadresults.Location = new System.Drawing.Point(962, 62);
+            this.btn_loadresults.Location = new System.Drawing.Point(1206, 15);
             this.btn_loadresults.Name = "btn_loadresults";
-            this.btn_loadresults.Size = new System.Drawing.Size(239, 49);
+            this.btn_loadresults.Size = new System.Drawing.Size(118, 49);
             this.btn_loadresults.TabIndex = 1;
             this.btn_loadresults.Text = "Load";
             this.btn_loadresults.UseVisualStyleBackColor = true;
@@ -224,18 +234,20 @@
             // 
             this.dg_results.AllowUserToAddRows = false;
             this.dg_results.AllowUserToDeleteRows = false;
+            this.dg_results.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dg_results.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_results.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CrewName,
+            this.Prognostic,
+            this.Expected,
             this.StartTime,
             this.FinishTime,
             this.TimeTaken,
-            this.Prognostic,
             this.Score});
             this.dg_results.Location = new System.Drawing.Point(6, 6);
             this.dg_results.Name = "dg_results";
             this.dg_results.ReadOnly = true;
-            this.dg_results.Size = new System.Drawing.Size(927, 666);
+            this.dg_results.Size = new System.Drawing.Size(1194, 666);
             this.dg_results.TabIndex = 0;
             // 
             // btn_end
@@ -326,39 +338,76 @@
             // 
             // CrewName
             // 
-            this.CrewName.HeaderText = "CrewName";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CrewName.DefaultCellStyle = dataGridViewCellStyle1;
+            this.CrewName.HeaderText = "Crew Name";
             this.CrewName.Name = "CrewName";
             this.CrewName.ReadOnly = true;
-            // 
-            // StartTime
-            // 
-            this.StartTime.HeaderText = "Start Time";
-            this.StartTime.Name = "StartTime";
-            this.StartTime.ReadOnly = true;
-            // 
-            // FinishTime
-            // 
-            this.FinishTime.HeaderText = "Finish Time";
-            this.FinishTime.Name = "FinishTime";
-            this.FinishTime.ReadOnly = true;
-            // 
-            // TimeTaken
-            // 
-            this.TimeTaken.HeaderText = "Taken";
-            this.TimeTaken.Name = "TimeTaken";
-            this.TimeTaken.ReadOnly = true;
+            this.CrewName.Width = 135;
             // 
             // Prognostic
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Prognostic.DefaultCellStyle = dataGridViewCellStyle2;
             this.Prognostic.HeaderText = "Prognostic";
             this.Prognostic.Name = "Prognostic";
             this.Prognostic.ReadOnly = true;
+            this.Prognostic.Width = 124;
+            // 
+            // Expected
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Expected.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Expected.HeaderText = "Expected";
+            this.Expected.Name = "Expected";
+            this.Expected.ReadOnly = true;
+            this.Expected.Width = 116;
+            // 
+            // StartTime
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.StartTime.DefaultCellStyle = dataGridViewCellStyle4;
+            this.StartTime.HeaderText = "Start Time";
+            this.StartTime.Name = "StartTime";
+            this.StartTime.ReadOnly = true;
+            this.StartTime.Width = 119;
+            // 
+            // FinishTime
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.FinishTime.DefaultCellStyle = dataGridViewCellStyle5;
+            this.FinishTime.HeaderText = "Finish Time";
+            this.FinishTime.Name = "FinishTime";
+            this.FinishTime.ReadOnly = true;
+            this.FinishTime.Width = 134;
+            // 
+            // TimeTaken
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.TimeTaken.DefaultCellStyle = dataGridViewCellStyle6;
+            this.TimeTaken.HeaderText = "Taken";
+            this.TimeTaken.Name = "TimeTaken";
+            this.TimeTaken.ReadOnly = true;
+            this.TimeTaken.Width = 88;
             // 
             // Score
             // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            this.Score.DefaultCellStyle = dataGridViewCellStyle7;
             this.Score.HeaderText = "Score";
             this.Score.Name = "Score";
             this.Score.ReadOnly = true;
+            this.Score.Width = 85;
+            // 
+            // btn_exportcsv
+            // 
+            this.btn_exportcsv.Location = new System.Drawing.Point(1206, 70);
+            this.btn_exportcsv.Name = "btn_exportcsv";
+            this.btn_exportcsv.Size = new System.Drawing.Size(118, 47);
+            this.btn_exportcsv.TabIndex = 2;
+            this.btn_exportcsv.Text = "Export";
+            this.btn_exportcsv.UseVisualStyleBackColor = true;
+            this.btn_exportcsv.Click += new System.EventHandler(this.btn_exportcsv_Click);
             // 
             // Main
             // 
@@ -417,10 +466,12 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
         private System.Windows.Forms.BindingSource raceCrewsBindingSource2;
         private System.Windows.Forms.DataGridViewTextBoxColumn CrewName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prognostic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Expected;
         private System.Windows.Forms.DataGridViewTextBoxColumn StartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn FinishTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeTaken;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Prognostic;
         private System.Windows.Forms.DataGridViewTextBoxColumn Score;
+        private System.Windows.Forms.Button btn_exportcsv;
     }
 }

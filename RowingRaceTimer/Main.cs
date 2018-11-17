@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace RowingRaceTimer
 {
     public partial class Main : Form
     {
-        public string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\toh-dc\RedirectedFolders$\gtichbon\My Documents\Visual Studio 2017\Projects\RowingRaceTimer\RowingRaceTimer\RowingRaceTimer.accdb";
+        //public string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\toh-dc\RedirectedFolders$\gtichbon\My Documents\Visual Studio 2017\Projects\RowingRaceTimer\RowingRaceTimer\RowingRaceTimer.accdb";
+        public string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=c:\RowingRaceTimer\RowingRaceTimer.accdb";
 
         public Main()
         {
@@ -125,7 +127,7 @@ namespace RowingRaceTimer
 
             tabControl.SelectedIndex = myTab;
 
-            int newrow = myGrid.Rows.Count -2;
+            int newrow = myGrid.Rows.Count - 2;
             myGrid.Rows[newrow].Cells[0].Value = id;
             myGrid.Rows[newrow].Cells[2].ReadOnly = false;
 
@@ -135,7 +137,7 @@ namespace RowingRaceTimer
         {
             recordtime(dg_endtime, 1, "finishtime");
         }
-        
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -153,7 +155,8 @@ namespace RowingRaceTimer
                 dg_starttime.AllowUserToAddRows = true;
                 btn_MaintToggle.Text = "Disallow Maintenance";
 
-            } else
+            }
+            else
             {
                 dg_starttime.AllowUserToAddRows = false;
                 dg_starttime.AllowUserToDeleteRows = false;
@@ -199,7 +202,7 @@ namespace RowingRaceTimer
                 {
                     case 1:
                         {
-                            recordtime(dg_starttime,0, "starttime");
+                            recordtime(dg_starttime, 0, "starttime");
                             break;
                         }
                     case 2:
@@ -218,7 +221,7 @@ namespace RowingRaceTimer
         }
 
 
-       
+
 
         private void dg_starttime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -278,22 +281,68 @@ namespace RowingRaceTimer
                     DateTime startdate = (DateTime)dataReader["starttime"];
                     DateTime finishtime = (DateTime)dataReader["finishtime"];
                     double prognostic = (double)dataReader["prognostic"];
-                    double totalprognostic = prognostic * 10;
+                    double totalprognostic = prognostic * 10;   //needs to change
+                    TimeSpan expectedspan = TimeSpan.FromSeconds(totalprognostic);
+                    string expected = expectedspan.ToString(@"hh\:mm\:ss\:ff");
+                    //string expected = expectedspan.ToString().Substring(3);
 
                     TimeSpan span = (finishtime - startdate);
 
 
                     //string difference = span.Hours.ToString("HH");
-                    string difference = span.ToString().Substring(3,8);
+                    //string taken = span.ToString().Substring(3);
+                    string taken = span.ToString(@"hh\:mm\:ss\:ff");
                     double seconds = span.TotalMilliseconds / 1000;
 
-                    double score =  Math.Round( totalprognostic / seconds * 100,2);
+                    double score = Math.Round(totalprognostic / seconds * 100, 2);
 
-                    dg_results.Rows.Add(dataReader["crew"], Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), Convert.ToDateTime(dataReader["finishtime"]).ToString("HH:mm:ss.ff"),difference,prognostic,score);
+                    dg_results.Rows.Add(dataReader["crew"], prognostic, expected, Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), Convert.ToDateTime(dataReader["finishtime"]).ToString("HH:mm:ss.ff"), taken, score);
                     //int newrow = dg_starttime.Rows.Count - 2;
                     //dg_starttime.Rows[newrow].Cells[2].ReadOnly = false;
                 }
             }
         }
+        private void btn_exportcsv_Click(object sender, EventArgs e)
+        {
+            string CsvFpath = @"CSV-EXPORT.csv";
+            try
+            {
+                System.IO.StreamWriter csvFileWriter = new StreamWriter(CsvFpath,false);
+                string columnHeaderText = "";
+                int countColumn = dg_results.ColumnCount - 1;
+                if (countColumn >= 0)
+                {
+                    columnHeaderText = dg_results.Columns[0].HeaderText;
+                }
+                for (int i = 1; i <= countColumn; i++)
+                {
+                    columnHeaderText = columnHeaderText + ',' + dg_results.Columns[i].HeaderText;
+                }
+                csvFileWriter.WriteLine(columnHeaderText);
+                foreach (DataGridViewRow dataRowObject in dg_results.Rows)
+                {
+                    if (!dataRowObject.IsNewRow)
+                    {
+                        string dataFromGrid = "";
+                        dataFromGrid = dataRowObject.Cells[0].Value.ToString();
+                        for (int i = 1; i <= countColumn; i++)
+                        {
+                            dataFromGrid = dataFromGrid + ',' + dataRowObject.Cells[i].Value.ToString();
+                        }
+                        csvFileWriter.WriteLine(dataFromGrid);
+                    }
+                }
+
+                csvFileWriter.Flush();
+                csvFileWriter.Close();
+            }
+            catch (Exception exceptionObject)
+            {
+                MessageBox.Show(exceptionObject.ToString());
+            }
+        }
+
+       
+
     }
 }
