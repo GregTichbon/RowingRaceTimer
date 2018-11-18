@@ -22,15 +22,11 @@ namespace RowingRaceTimer
             InitializeComponent();
             RegisterHotKey(this.Handle, 1, (int)KeyModifier.None, Keys.F1.GetHashCode());       // Register F1 as global hotkey. 
             RegisterHotKey(this.Handle, 2, (int)KeyModifier.None, Keys.F10.GetHashCode());       // Register F10 as global hotkey. 
-
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'rowingRaceTimerDataSet1.RaceCrews' table. You can move, or remove it, as needed.
-            this.raceCrewsTableAdapter1.Fill(this.rowingRaceTimerDataSet1.RaceCrews);
-            // TODO: This line of code loads data into the 'rowingRaceTimerDataSet.RaceCrews' table. You can move, or remove it, as needed.
-            //this.raceCrewsTableAdapter.Fill(this.rowingRaceTimerDataSet.RaceCrews);
+            this.raceCrewsTableAdapter2.Fill(this.rowingRaceTimerDataSet11.RaceCrews);
 
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
@@ -95,7 +91,7 @@ namespace RowingRaceTimer
             recordtime(dg_starttime, 0, "starttime");
         }
 
-        public void recordtime(DataGridView myGrid, int myTab, string myName)
+        private void recordtime(DataGridView myGrid, int myTab, string myName)
         {
 
             timer1.Stop();
@@ -138,7 +134,6 @@ namespace RowingRaceTimer
             recordtime(dg_endtime, 1, "finishtime");
         }
 
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -166,22 +161,6 @@ namespace RowingRaceTimer
             }
 
         }
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-        enum KeyModifier
-        {
-            None = 0,
-            Alt = 1,
-            Control = 2,
-            Shift = 4,
-            WinKey = 8
-        }
-
-
 
         protected override void WndProc(ref Message m)
         {
@@ -215,24 +194,14 @@ namespace RowingRaceTimer
             }
         }
 
-        private void ExampleForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            UnregisterHotKey(this.Handle, 0);       // Unregister hotkey with id 0 before closing the form. You might want to call this more than once with different id values if you are planning to register more than one hotkey.
-        }
-
-
-
-
         private void dg_starttime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 2)
             {
-                //int crew_id = Convert.ToInt16(dg_starttime.Rows[e.RowIndex].Cells[2].Value);
                 string crew_id = dg_starttime.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-                //int starttime_id = Convert.ToInt16(dg_starttime.Rows[e.RowIndex].Cells[0].Value) ?? 0;
-                string starttime_id = dg_starttime.Rows[e.RowIndex].Cells[0].Value.ToString();
-                if (crew_id != "" && starttime_id != "")
+                string time_id = dg_starttime.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (crew_id != "" && time_id != "")
                 {
                     using (OleDbConnection connection = new OleDbConnection(ConnectionString))
                     {
@@ -243,29 +212,46 @@ namespace RowingRaceTimer
                         command.Parameters[0].Value = crew_id;
 
                         command.Parameters.Add("@starttime_id", OleDbType.BigInt);
-                        command.Parameters[1].Value = starttime_id;
+                        command.Parameters[1].Value = time_id;
 
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
-
                 }
             }
-
         }
 
-        private void dg_starttime_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dg_endtime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == 2)
+            {
+                string crew_id = dg_endtime.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-        }
+                string time_id = dg_endtime.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (crew_id != "" && time_id != "")
+                {
+                    using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                    {
+                        connection.Open();
+                        string queryString = "update [finishtime] set crew_ID = ? where finishtime_id = ?";
+                        OleDbCommand command = new OleDbCommand(queryString, connection);
+                        command.Parameters.Add("@crew_id", OleDbType.BigInt);
+                        command.Parameters[0].Value = crew_id;
 
-        private void button2_Click(object sender, EventArgs e)
-        {
+                        command.Parameters.Add("@finishtime_id", OleDbType.BigInt);
+                        command.Parameters[1].Value = time_id;
 
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
         }
 
         private void btn_loadresults_Click(object sender, EventArgs e)
         {
+            dg_results.Rows.Clear();
+            dg_results.Refresh();
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 connection.Open();
@@ -304,19 +290,21 @@ namespace RowingRaceTimer
         }
         private void btn_exportcsv_Click(object sender, EventArgs e)
         {
-            string CsvFpath = @"CSV-EXPORT.csv";
+            string CsvFpath = @"c:\RowingRaceTimer\RowingRaceTimer.csv";
             try
             {
                 System.IO.StreamWriter csvFileWriter = new StreamWriter(CsvFpath,false);
                 string columnHeaderText = "";
                 int countColumn = dg_results.ColumnCount - 1;
-                if (countColumn >= 0)
+                //if (countColumn >= 0)
+                //{
+                //columnHeaderText = dg_results.Columns[0].HeaderText;
+                //}
+                string delim = "";
+                for (int i = 0; i <= countColumn; i++)
                 {
-                    columnHeaderText = dg_results.Columns[0].HeaderText;
-                }
-                for (int i = 1; i <= countColumn; i++)
-                {
-                    columnHeaderText = columnHeaderText + ',' + dg_results.Columns[i].HeaderText;
+                    columnHeaderText = columnHeaderText + delim + dg_results.Columns[i].HeaderText;
+                    delim = ",";
                 }
                 csvFileWriter.WriteLine(columnHeaderText);
                 foreach (DataGridViewRow dataRowObject in dg_results.Rows)
@@ -324,10 +312,12 @@ namespace RowingRaceTimer
                     if (!dataRowObject.IsNewRow)
                     {
                         string dataFromGrid = "";
-                        dataFromGrid = dataRowObject.Cells[0].Value.ToString();
-                        for (int i = 1; i <= countColumn; i++)
+                        delim = "";
+                        //dataFromGrid = dataRowObject.Cells[0].Value.ToString();
+                        for (int i = 0; i <= countColumn; i++)
                         {
-                            dataFromGrid = dataFromGrid + ',' + dataRowObject.Cells[i].Value.ToString();
+                            dataFromGrid = dataFromGrid + delim + "\"" + dataRowObject.Cells[i].Value.ToString() + "\"";
+                            delim = ",";
                         }
                         csvFileWriter.WriteLine(dataFromGrid);
                     }
@@ -342,7 +332,26 @@ namespace RowingRaceTimer
             }
         }
 
-       
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Unregister hotkeys before closing the form. 
+            UnregisterHotKey(this.Handle, 0);
+            UnregisterHotKey(this.Handle, 1);
 
-    }
+        }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        enum KeyModifier
+        {
+            None = 0,
+            Alt = 1,
+            Control = 2,
+            Shift = 4,
+            WinKey = 8
+        }
+   }
 }
