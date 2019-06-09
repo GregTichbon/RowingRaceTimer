@@ -16,10 +16,13 @@ namespace RowingRaceTimer
     {
         //public string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\toh-dc\RedirectedFolders$\gtichbon\My Documents\Visual Studio 2017\Projects\RowingRaceTimer\RowingRaceTimer\RowingRaceTimer.accdb";
         public string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=c:\RowingRaceTimer\RowingRaceTimer.accdb";
-        public Boolean singlestart = true;
-        public Boolean prognostics = false;
+
+
+        public Boolean singlestart;
+        public Boolean prognostics;
         public DateTime singlestartdate;
-        public int race = 3;
+        public int race;
+        public int distance;  //meters
 
         public Main()
         {
@@ -30,15 +33,58 @@ namespace RowingRaceTimer
 
         private void Main_Load(object sender, EventArgs e)
         {
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "select ParameterValue from [Parameter] where ParameterName = 'CurrentRace'";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    race = Convert.ToInt16(dataReader["ParameterValue"].ToString());
+                }
+            }
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "select * from [Race] where Race_ID = " + race;
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    //string x1 = dataReader["SingleStart"].ToString();
+                    //string x2 = dataReader["prognostics"].ToString();
+
+                    singlestart = (Boolean)dataReader["SingleStart"];
+                    prognostics = (Boolean)dataReader["prognostics"];
+                    distance = Convert.ToInt16(dataReader["distance"].ToString());
+                    //distance = (int)dataReader["distance"];
+
+                }
+            }
+
+
+
             this.raceCrewsTableAdapter2.Fill(this.rowingRaceTimerDataSet11.RaceCrews);
 
             if (!prognostics)
             {
-             
+
                 dg_results.Columns[1].Visible = false;
                 dg_results.Columns[2].Visible = false;
-                dg_results.Columns[6].Visible = false;
-           
+                dg_results.Columns[3].Visible = false;
+                dg_results.Columns[7].Visible = false;
+                dg_results.Columns[8].Visible = false;
+
             }
             if (singlestart)
             {
@@ -88,7 +134,7 @@ namespace RowingRaceTimer
                         c1++;
                         dg_starttime.Rows.Add(dataReader["starttime_id"], c1, Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), dataReader["crew_id"]);
                         int newrow = dg_starttime.Rows.Count - 2;
-                        dg_starttime.Rows[newrow].Cells[2].ReadOnly = false;
+                        dg_starttime.Rows[newrow].Cells[3].ReadOnly = false;
                     }
                 }
             }
@@ -224,23 +270,23 @@ namespace RowingRaceTimer
         {
             if (btn_MaintToggle.Text == "Allow Maintenance")
             {
-                dg_starttime.AllowUserToAddRows = true;
-                dg_starttime.AllowUserToDeleteRows = true;
-                dg_starttime.AllowUserToAddRows = true;
+                dg_endtime.AllowUserToAddRows = true;
+                dg_endtime.AllowUserToDeleteRows = true;
+                dg_endtime.AllowUserToAddRows = true;
                 btn_MaintToggle.Text = "Disallow Maintenance";
 
             }
             else
             {
-                dg_starttime.AllowUserToAddRows = false;
-                dg_starttime.AllowUserToDeleteRows = false;
-                dg_starttime.AllowUserToAddRows = false;
+                dg_endtime.AllowUserToAddRows = false;
+                dg_endtime.AllowUserToDeleteRows = false;
+                dg_endtime.AllowUserToAddRows = false;
                 btn_MaintToggle.Text = "Allow Maintenance";
 
             }
 
         }
-  
+
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -248,7 +294,7 @@ namespace RowingRaceTimer
             if (m.Msg == 0x0312)
             {
                 // Note that the three lines below are not needed if you only want to register one hotkey.
-                 //The below lines are useful in case you want to register multiple keys, which you can use a switch with the id as argument, or if you want to know which key/modifier was pressed for some particular reason. 
+                //The below lines are useful in case you want to register multiple keys, which you can use a switch with the id as argument, or if you want to know which key/modifier was pressed for some particular reason. 
 
                 Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
                 KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
@@ -272,12 +318,12 @@ namespace RowingRaceTimer
 
             }
         }
-  
+
         private void dg_starttime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 3)
             {
-                string crew_id = dg_starttime.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string crew_id = dg_starttime.Rows[e.RowIndex].Cells[3].Value.ToString();
 
                 string time_id = dg_starttime.Rows[e.RowIndex].Cells[0].Value.ToString();
                 if (crew_id != "" && time_id != "")
@@ -302,9 +348,9 @@ namespace RowingRaceTimer
 
         private void dg_endtime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 3)
             {
-                string crew_id = dg_endtime.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string crew_id = dg_endtime.Rows[e.RowIndex].Cells[3].Value.ToString();
 
                 string time_id = dg_endtime.Rows[e.RowIndex].Cells[0].Value.ToString();
                 if (crew_id != "" && time_id != "")
@@ -333,20 +379,118 @@ namespace RowingRaceTimer
 
             dg_results.Rows.Clear();
             dg_results.Refresh();
+
+            string ErrorMessage = "";
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                queryString = @"SELECT [BoatAlpha] & [Boatnumber] AS Boat
+                    FROM StartTime RIGHT JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID
+                    WHERE StartTime.StartTime_ID Is Null AND Crew.Race_ID = " + race.ToString() + @"
+                    ORDER BY Crew.BoatAlpha, Crew.BoatNumber";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    ErrorMessage += "Boat " + dataReader["Boat"] + " has not started" + Environment.NewLine;
+                }
+            }
+
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                queryString = @"SELECT [BoatAlpha] & [Boatnumber] AS Boat
+                        FROM StartTime INNER JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID
+                        WHERE StartTime.Race_ID = " + race.ToString() + @" 
+                        GROUP BY StartTime.Crew_ID, [BoatAlpha] & [Boatnumber]
+                        HAVING Count(StartTime.Crew_ID) > 1";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    ErrorMessage += "Boat " + dataReader["Boat"] + " has started more than once" + Environment.NewLine;
+                }
+            }
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                queryString = @"SELECT [BoatAlpha] & [Boatnumber] AS Boat
+                        FROM FinishTime INNER JOIN Crew ON FinishTime.Crew_ID = Crew.Crew_ID
+                        WHERE FinishTime.Race_ID = " + race.ToString() + @" 
+                        GROUP BY FinishTime.Crew_ID, [BoatAlpha] & [Boatnumber]
+                        HAVING Count(FinishTime.Crew_ID) > 1";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    ErrorMessage += "Boat " + dataReader["Boat"] + " has finished more than once" + Environment.NewLine;
+                }
+            }
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                queryString = @"SELECT [BoatAlpha] & [Boatnumber] AS Boat
+                        FROM FinishTime INNER JOIN Crew ON FinishTime.Crew_ID = Crew.Crew_ID
+                        WHERE FinishTime.Race_ID = " + race.ToString() + @" 
+                        GROUP BY FinishTime.Crew_ID, [BoatAlpha] & [Boatnumber]
+                        HAVING Count(FinishTime.Crew_ID) > 1";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    ErrorMessage += "Boat " + dataReader["Boat"] + " has not finished" + Environment.NewLine;
+                }
+            }
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                queryString = @"SELECT [BoatAlpha] & [Boatnumber] AS Boat
+                        FROM (FinishTime LEFT JOIN StartTime ON FinishTime.Crew_ID = StartTime.Crew_ID) LEFT JOIN Crew ON FinishTime.Crew_ID = Crew.Crew_ID
+                        WHERE StartTime.StartTime_ID Is Null AND FinishTime.Race_ID = " + race.ToString();
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    ErrorMessage += "Boat " + dataReader["Boat"] + " has finished but did not start" + Environment.NewLine;
+                }
+            }
+
+            if (ErrorMessage != "")
+            {
+                MessageBox.Show(ErrorMessage);
+            }
+
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 connection.Open();
                 //string crewformat = "Right(\"0\" & [Boatnumber],2) & \" \" & [Club].[code]+\" \"+[crewname]";
-                string crewformat = " [BoatAlpha] & [BoatNumber] & \" \" & [crewname] & \" (\" & [clubName] & \")\"";
+                string crewformat = " [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" (\" & [crewname] & \")\"";
 
                 if (singlestart)
                 {
-                    queryString = "SELECT '" + singlestartdate + "' as [StartTime], FinishTime.FinishTime, " + crewformat + " AS Crew, Crew.Prognostic, Crew.Division " +
-                                                  "FROM (Club INNER JOIN Crew ON Club.Club_ID = Crew.Club_ID) INNER JOIN FinishTime ON Crew.Crew_ID = FinishTime.Crew_ID " +
+                    queryString = "SELECT crew.Race_ID, '" + singlestartdate + "' as [StartTime], FinishTime.FinishTime, " + crewformat + " AS Crew, Crew.Prognostic, Crew.Division, Crew.BoatType " +
+                                     "FROM FinishTime INNER JOIN (StartTime INNER JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID) ON FinishTime.Crew_ID = StartTime.Crew_ID " +
                                                   "where finishtime.race_id = " + race.ToString();
-                } else {
-                    queryString = "SELECT StartTime.StartTime, FinishTime.FinishTime, " + crewformat + " AS Crew, Crew.Prognostic, Crew.Division " +
-                                     "FROM Club INNER JOIN(FinishTime INNER JOIN (StartTime INNER JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID) ON FinishTime.Crew_ID = StartTime.Crew_ID) ON Club.Club_ID = Crew.Club_ID " +
+                }
+                else
+                {
+                    queryString = "SELECT crew.Race_ID, StartTime.StartTime, FinishTime.FinishTime, " + crewformat + " AS Crew, Crew.Prognostic, Crew.Division, Crew.BoatType " +
+                                     "FROM FinishTime INNER JOIN (StartTime INNER JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID) ON FinishTime.Crew_ID = StartTime.Crew_ID " +
                                      "where finishtime.race_id = " + race.ToString();
                 }
                 OleDbCommand command = new OleDbCommand(queryString, connection);
@@ -365,18 +509,21 @@ namespace RowingRaceTimer
                     }
                     DateTime finishtime = (DateTime)dataReader["finishtime"];
                     string Division = dataReader["Division"].ToString();
+                    string BoatType = dataReader["BoatType"].ToString();
 
                     double prognostic = 0;
                     double totalprognostic = 0;
                     string expected = "";
+                    double expectedSeconds = 0;
 
 
                     if (prognostics)
                     {
                         prognostic = (double)dataReader["prognostic"];
-                        totalprognostic = prognostic * 10;   //needs to change
+                        totalprognostic = prognostic * (distance / 1000); //distance is in metres
                         TimeSpan expectedspan = TimeSpan.FromSeconds(totalprognostic);
                         expected = expectedspan.ToString(@"hh\:mm\:ss\:ff");
+                        expectedSeconds = expectedspan.TotalMilliseconds / 1000;
                     }
                     //string expected = expectedspan.ToString().Substring(3);
 
@@ -388,7 +535,7 @@ namespace RowingRaceTimer
                     double seconds = span.TotalMilliseconds / 1000;
 
                     double score = Math.Round(totalprognostic / seconds * 100, 2);
-                    dg_results.Rows.Add(dataReader["crew"], prognostic, expected, Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), Convert.ToDateTime(dataReader["finishtime"]).ToString("HH:mm:ss.ff"), taken, score, Division);
+                    dg_results.Rows.Add(dataReader["race_id"], dataReader["crew"], prognostic, expected, expectedSeconds, Convert.ToDateTime(dataReader["starttime"]).ToString("HH:mm:ss.ff"), Convert.ToDateTime(dataReader["finishtime"]).ToString("HH:mm:ss.ff"), taken, seconds, score, Division, BoatType);
                 }
             }
         }
@@ -467,6 +614,107 @@ namespace RowingRaceTimer
         private void rowingRaceTimerDataSet11BindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dg_starttime_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void raceCrewsBindingSource3_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_MaintToggleStart_Click(object sender, EventArgs e)
+        {
+            {
+                if (btn_MaintToggleStart.Text == "Allow Maintenance")
+                {
+                    dg_starttime.AllowUserToAddRows = true;
+                    dg_starttime.AllowUserToDeleteRows = true;
+                    dg_starttime.AllowUserToAddRows = true;
+                    btn_MaintToggleStart.Text = "Disallow Maintenance";
+
+                }
+                else
+                {
+                    dg_starttime.AllowUserToAddRows = false;
+                    dg_starttime.AllowUserToDeleteRows = false;
+                    dg_starttime.AllowUserToAddRows = false;
+                    btn_MaintToggleStart.Text = "Allow Maintenance";
+
+                }
+
+            }
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+
+            //string columnHeaderText = "";
+            int countColumn = dg_results.ColumnCount - 1;
+            //if (countColumn >= 0)
+            //{
+            //columnHeaderText = dg_results.Columns[0].HeaderText;
+            //}
+            string delim = "";
+            //for (int i = 0; i <= countColumn; i++)
+            //{
+            //columnHeaderText = columnHeaderText + delim + dg_results.Columns[i].HeaderText;
+            // = ",";
+            //}
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "DELETE * FROM RaceResults where race_id = " + race.ToString();
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                int recordsupdated = command.ExecuteNonQuery();
+
+
+            }
+
+
+            foreach (DataGridViewRow dataRowObject in dg_results.Rows)
+            {
+                if (!dataRowObject.IsNewRow)
+                {
+                    string dataFromGrid = "";
+                    delim = "";
+                    //dataFromGrid = dataRowObject.Cells[0].Value.ToString();
+                    for (int i = 0; i <= countColumn; i++)
+                    {
+                        dataFromGrid = dataFromGrid + delim + "'" + dataRowObject.Cells[i].Value.ToString().Replace("'","''") + "'";
+                        delim = ",";
+                    }
+                    string b = dataFromGrid; //TODO
+
+                    using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                    {
+                        connection.Open();
+                        string queryString = "insert into raceresults (Race_ID,CrewName,Prognostic,Expected,ExpectedSeconds,StartTime,FinishTime,Taken,TakenSeconds,Score,Division,BoatType) values (" + dataFromGrid + ")";
+
+                        OleDbCommand command = new OleDbCommand(queryString, connection);
+                        command.CommandType = CommandType.Text;
+                        int recordsupdated = command.ExecuteNonQuery();
+
+
+                    }
+
+
+
+
+                }
+            }
+        }
+
+        private void btn_report_Click(object sender, EventArgs e)
+        {
+            var newForm =  new RaceResultsReport();
+            newForm.Show();
         }
     }
 }
