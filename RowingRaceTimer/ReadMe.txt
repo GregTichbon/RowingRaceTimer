@@ -1,0 +1,1 @@
+﻿Expects Database and Crystal Reports to be in c:\RowingRaceTimer
