@@ -215,6 +215,7 @@ namespace RowingRaceTimer
 
         private void recordtime(DataGridView myGrid, int myTab, string myName)
         {
+            Console.Beep(5000, 500);
             //timer1.Stop();
             //string starttime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff");
             DateTime dt_starttime = Convert.ToDateTime(lbl_Timer.Tag);
@@ -440,10 +441,11 @@ namespace RowingRaceTimer
             {
                 connection.Open();
                 queryString = @"SELECT [BoatAlpha] & [Boatnumber] AS Boat
-                        FROM FinishTime INNER JOIN Crew ON FinishTime.Crew_ID = Crew.Crew_ID
-                        WHERE FinishTime.Race_ID = " + race.ToString() + @" 
-                        GROUP BY FinishTime.Crew_ID, [BoatAlpha] & [Boatnumber]
-                        HAVING Count(FinishTime.Crew_ID) > 1";
+                        FROM (StartTime LEFT JOIN FinishTime ON StartTime.Crew_ID = FinishTime.Crew_ID) INNER JOIN Crew ON StartTime.Crew_ID = Crew.Crew_ID
+                        WHERE StartTime.Race_ID = " + race.ToString() + @" 
+                        GROUP BY [BoatAlpha] & [Boatnumber], StartTime.Crew_ID
+                        HAVING Count(FinishTime.Crew_ID) < 1";
+
 
                 OleDbCommand command = new OleDbCommand(queryString, connection);
                 command.CommandType = CommandType.Text;

@@ -55,6 +55,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RaceResults";
             this.Text = "RaceResults";
+            this.Load += new System.EventHandler(this.RaceResults_Load);
             this.ResumeLayout(false);
 
         }

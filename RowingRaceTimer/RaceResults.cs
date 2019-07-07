@@ -18,5 +18,10 @@ namespace RowingRaceTimer
 
 
         }
+
+        private void RaceResults_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

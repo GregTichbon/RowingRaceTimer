@@ -23,40 +23,72 @@ namespace RowingRaceTimer
 
         private void RaceResultsReport_Load(object sender, EventArgs e)
         {
-            /*
+            Int16 race = 0;
             string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=c:\RowingRaceTimer\RowingRaceTimer.accdb";
-            DataSet ds = new DataSet();
-            */
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "select ParameterValue from [Parameter] where ParameterName = 'CurrentRace'";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    race = Convert.ToInt16(dataReader["ParameterValue"].ToString());
+                }
+            }
+            
 
             ReportDocument rpt = new ReportDocument();
             rpt.Load("C:\\RowingRaceTimer\\results.rpt");
 
-            /*
             OleDbConnection con = new OleDbConnection(ConnectionString);
-            string sql = @"SELECT RaceResults.Prognostic, RaceResults.StartTime, RaceResults.FinishTime, RaceResults.Taken, RaceResults.Score, RaceResults.BoatType, Race.RaceName, Race.RaceDateTime, Race.Distance, RaceResults.CrewName
-                     FROM RaceResults RaceResults INNER JOIN Race Race ON RaceResults.Race_ID=Race.Race_ID 
-                     where RaceResults.race_id = 5
+
+            DataSet ds = new DataSet();
+            string sql1 = @"SELECT RaceResults.Prognostic, RaceResults.StartTime, RaceResults.FinishTime, RaceResults.Taken, RaceResults.Score, RaceResults.BoatType, RaceResults.CrewName
+                     FROM RaceResults 
+                     where RaceResults.race_id = " + race.ToString() + @"
                      ORDER BY RaceResults.Score DESC";
-            OleDbCommand cmd = new OleDbCommand(sql);
 
+            OleDbCommand cmd1 = new OleDbCommand(sql1);
 
-            cmd.CommandType = CommandType.Text;
-            cmd.Connection = con;
-            OleDbDataAdapter adp = new OleDbDataAdapter();
-            adp.SelectCommand = cmd;
+            cmd1.CommandType = CommandType.Text;
+            cmd1.Connection = con;
+            OleDbDataAdapter adp1 = new OleDbDataAdapter();
+            adp1.SelectCommand = cmd1;
 
+            DataTable dataTable1 = new DataTable();
+            dataTable1.TableName = "RaceResults";
 
-            adp.Fill(ds);
-            
-            rpt.SetDataSource(ds.Tables["Table"]);
+            adp1.Fill(dataTable1);
 
-            //rpt.DataSourceConnections[0].SetConnection("", "C:\\RowingRaceTimer\\RowingRaceTimer.accdbx", false);
-            //rpt.DataSourceConnections[1].SetConnection("", "C:\\RowingRaceTimer\\RowingRaceTimer.accdb", false);
+            string sql2 = @"SELECT Race.RaceName, Race.RaceDateTime, Race.Distance 
+                     FROM Race 
+                     where Race.race_id = " + race.ToString();
 
-            // if password is given then give the password
-            // if not give it will ask at runtime
-            //rpt.DataSourceConnections[0].SetLogon("", "");
-            */
+            OleDbCommand cmd2 = new OleDbCommand(sql2);
+
+            cmd2.CommandType = CommandType.Text;
+            cmd2.Connection = con;
+            OleDbDataAdapter adp2 = new OleDbDataAdapter();
+            adp2.SelectCommand = cmd2;
+
+            DataTable dataTable2 = new DataTable();
+            dataTable2.TableName = "Race";
+
+            adp2.Fill(dataTable2);
+            int x10 = dataTable2.Rows.Count;
+
+            ds.Tables.Add(dataTable1);
+            ds.Tables.Add(dataTable2);
+
+            string x5 = ds.Tables[0].TableName;
+            string x6 = ds.Tables[1].TableName;
+
+            rpt.SetDataSource(ds);
 
             crv_report.ReportSource = rpt;
             crv_report.Refresh();
