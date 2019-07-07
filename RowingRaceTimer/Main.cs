@@ -160,6 +160,26 @@ namespace RowingRaceTimer
                 }
             }
 
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "select * from [Crew] where race_id = ? order by [boatnumber], [boatalpha], prognostic desc";
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                command.Parameters.Add("@race_id", OleDbType.Integer);
+                command.Parameters[0].Value = race;
+
+                command.CommandType = CommandType.Text;
+                OleDbDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    dg_crews.Rows.Add(dataReader["crew_id"], dataReader["boatnumber"], dataReader["boatalpha"], dataReader["club"], dataReader["boattype"], dataReader["crewname"], dataReader["prognostic"]);
+                    int newrow = dg_crews.Rows.Count - 2;
+                }
+            }
+
+
         }
 
         private void btn_StartTime_Click(object sender, EventArgs e)
@@ -273,7 +293,6 @@ namespace RowingRaceTimer
             {
                 dg_endtime.AllowUserToAddRows = true;
                 dg_endtime.AllowUserToDeleteRows = true;
-                dg_endtime.AllowUserToAddRows = true;
                 btn_MaintToggle.Text = "Disallow Maintenance";
 
             }
@@ -281,7 +300,6 @@ namespace RowingRaceTimer
             {
                 dg_endtime.AllowUserToAddRows = false;
                 dg_endtime.AllowUserToDeleteRows = false;
-                dg_endtime.AllowUserToAddRows = false;
                 btn_MaintToggle.Text = "Allow Maintenance";
 
             }
@@ -635,7 +653,6 @@ namespace RowingRaceTimer
                 {
                     dg_starttime.AllowUserToAddRows = true;
                     dg_starttime.AllowUserToDeleteRows = true;
-                    dg_starttime.AllowUserToAddRows = true;
                     btn_MaintToggleStart.Text = "Disallow Maintenance";
 
                 }
@@ -643,7 +660,6 @@ namespace RowingRaceTimer
                 {
                     dg_starttime.AllowUserToAddRows = false;
                     dg_starttime.AllowUserToDeleteRows = false;
-                    dg_starttime.AllowUserToAddRows = false;
                     btn_MaintToggleStart.Text = "Allow Maintenance";
 
                 }
@@ -717,6 +733,51 @@ namespace RowingRaceTimer
         {
             var newForm =  new RaceResultsReport();
             newForm.Show();
+        }
+
+        private void dg_starttime_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+           
+        }
+
+        private void dg_starttime_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dg_starttime.SelectedRows)
+            {
+                string time_id = item.Cells[0].Value.ToString();
+                using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                {
+                    connection.Open();
+                    string queryString = "delete * from [starttime] where starttime_id = " + time_id;
+                    OleDbCommand command = new OleDbCommand(queryString, connection);
+                    //command.Parameters.Add("@starttime_id", OleDbType.BigInt);
+                    //command.Parameters[0].Value = time_id;
+
+                    command.CommandType = CommandType.Text;
+                    command.ExecuteNonQuery();
+
+                }
+            }
+        }
+
+        private void dg_endtime_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dg_endtime.SelectedRows)
+            {
+                string time_id = item.Cells[0].Value.ToString();
+                using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                {
+                    connection.Open();
+                    string queryString = "delete * from [finishtime] where finishtime_id = " + time_id;
+                    OleDbCommand command = new OleDbCommand(queryString, connection);
+                    //command.Parameters.Add("@starttime_id", OleDbType.BigInt);
+                    //command.Parameters[0].Value = time_id;
+
+                    command.CommandType = CommandType.Text;
+                    command.ExecuteNonQuery();
+
+                }
+            }
         }
     }
 }
