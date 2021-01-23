@@ -38,8 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.btn_StartTime = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -49,36 +47,15 @@
             this.lbl_starttime = new System.Windows.Forms.Label();
             this.btn_MaintToggleStart = new System.Windows.Forms.Button();
             this.dg_starttime = new System.Windows.Forms.DataGridView();
-            this.StartID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StartNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Crew = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.raceCrewsBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.rowingRaceTimerDataSet11 = new RowingRaceTimer.RowingRaceTimerDataSet1();
             this.tabPageFinish = new System.Windows.Forms.TabPage();
             this.btn_MaintToggle = new System.Windows.Forms.Button();
             this.dg_endtime = new System.Windows.Forms.DataGridView();
-            this.FinishID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FinishNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.raceCrewsBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.tabPageResults = new System.Windows.Forms.TabPage();
             this.btn_report = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_exportcsv = new System.Windows.Forms.Button();
             this.btn_loadresults = new System.Windows.Forms.Button();
             this.dg_results = new System.Windows.Forms.DataGridView();
-            this.btn_end = new System.Windows.Forms.Button();
-            this.raceCrewsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.rowingRaceTimerDataSet1 = new RowingRaceTimer.RowingRaceTimerDataSet();
-            this.raceCrewsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.raceCrewsTableAdapter1 = new RowingRaceTimer.RowingRaceTimerDataSetTableAdapters.RaceCrewsTableAdapter();
-            this.raceCrewsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.raceCrewsTableAdapter2 = new RowingRaceTimer.RowingRaceTimerDataSet1TableAdapters.RaceCrewsTableAdapter();
-            this.rowingRaceTimerDataSet11BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tabPageCrews = new System.Windows.Forms.TabPage();
-            this.dg_crews = new System.Windows.Forms.DataGridView();
             this.Race_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CrewName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prognostic = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,30 +68,60 @@
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Division = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BoatType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Crew_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPageCrews = new System.Windows.Forms.TabPage();
+            this.dg_crews = new System.Windows.Forms.DataGridView();
+            this.CrewID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BoatNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BoatAlpha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Club = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BoatType2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CrewName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prognostic2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BoatType1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CrewName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prognostic1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPagePrognostics = new System.Windows.Forms.TabPage();
+            this.dgPrognostics = new System.Windows.Forms.DataGridView();
+            this.P_Age = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.P_Gender = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.P_PrognosticScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbGender = new System.Windows.Forms.ComboBox();
+            this.cmbDivision = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbBoat = new System.Windows.Forms.ComboBox();
+            this.cmbDiscipline = new System.Windows.Forms.ComboBox();
+            this.btn_end = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.maintainRacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setCurrentRaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearResultsForCurrentRaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rowingRaceTimerDataSet = new RowingRaceTimer.RowingRaceTimerDataSet();
+            this.crewTableAdapter = new RowingRaceTimer.RowingRaceTimerDataSetTableAdapters.CrewTableAdapter();
+            this.StartID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CrewStart = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.FinishID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FinishNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeFinish = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CrewFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_starttime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet11)).BeginInit();
             this.tabPageFinish.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_endtime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource4)).BeginInit();
             this.tabPageResults.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_results)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet11BindingSource)).BeginInit();
             this.tabPageCrews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_crews)).BeginInit();
+            this.tabPagePrognostics.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPrognostics)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.crewBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_StartTime
@@ -154,6 +161,7 @@
             this.tabControl.Controls.Add(this.tabPageFinish);
             this.tabControl.Controls.Add(this.tabPageResults);
             this.tabControl.Controls.Add(this.tabPageCrews);
+            this.tabControl.Controls.Add(this.tabPagePrognostics);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(12, 99);
             this.tabControl.Name = "tabControl";
@@ -207,10 +215,10 @@
             this.dg_starttime.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.StartID,
             this.StartNum,
-            this.Time,
-            this.Crew});
+            this.TimeStart,
+            this.CrewStart});
             this.dg_starttime.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dg_starttime.Location = new System.Drawing.Point(6, 6);
+            this.dg_starttime.Location = new System.Drawing.Point(3, 6);
             this.dg_starttime.Name = "dg_starttime";
             this.dg_starttime.RowTemplate.Height = 35;
             this.dg_starttime.Size = new System.Drawing.Size(1086, 666);
@@ -219,51 +227,6 @@
             this.dg_starttime.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_starttime_CellEndEdit);
             this.dg_starttime.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dg_starttime_RowsRemoved);
             this.dg_starttime.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dg_starttime_UserDeletingRow);
-            // 
-            // StartID
-            // 
-            this.StartID.HeaderText = "ID";
-            this.StartID.Name = "StartID";
-            this.StartID.Visible = false;
-            this.StartID.Width = 43;
-            // 
-            // StartNum
-            // 
-            this.StartNum.HeaderText = "No.";
-            this.StartNum.Name = "StartNum";
-            this.StartNum.ReadOnly = true;
-            this.StartNum.Width = 65;
-            // 
-            // Time
-            // 
-            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Time.HeaderText = "Time";
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Time.Width = 150;
-            // 
-            // Crew
-            // 
-            this.Crew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Crew.DataSource = this.raceCrewsBindingSource3;
-            this.Crew.DisplayMember = "Crew";
-            this.Crew.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Crew.HeaderText = "Crew";
-            this.Crew.Name = "Crew";
-            this.Crew.ValueMember = "Crew_ID";
-            this.Crew.Width = 880;
-            // 
-            // raceCrewsBindingSource3
-            // 
-            this.raceCrewsBindingSource3.DataMember = "RaceCrews";
-            this.raceCrewsBindingSource3.DataSource = this.rowingRaceTimerDataSet11;
-            this.raceCrewsBindingSource3.CurrentChanged += new System.EventHandler(this.raceCrewsBindingSource3_CurrentChanged);
-            // 
-            // rowingRaceTimerDataSet11
-            // 
-            this.rowingRaceTimerDataSet11.DataSetName = "RowingRaceTimerDataSet1";
-            this.rowingRaceTimerDataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tabPageFinish
             // 
@@ -300,8 +263,8 @@
             this.dg_endtime.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FinishID,
             this.FinishNum,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewComboBoxColumn1});
+            this.TimeFinish,
+            this.CrewFinish});
             this.dg_endtime.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dg_endtime.Location = new System.Drawing.Point(6, 6);
             this.dg_endtime.Name = "dg_endtime";
@@ -310,46 +273,6 @@
             this.dg_endtime.TabIndex = 2;
             this.dg_endtime.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_endtime_CellEndEdit);
             this.dg_endtime.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dg_endtime_UserDeletingRow);
-            // 
-            // FinishID
-            // 
-            this.FinishID.HeaderText = "FinishID";
-            this.FinishID.Name = "FinishID";
-            this.FinishID.Visible = false;
-            this.FinishID.Width = 70;
-            // 
-            // FinishNum
-            // 
-            this.FinishNum.HeaderText = "No.";
-            this.FinishNum.Name = "FinishNum";
-            this.FinishNum.ReadOnly = true;
-            this.FinishNum.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Time";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 150;
-            // 
-            // dataGridViewComboBoxColumn1
-            // 
-            this.dataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewComboBoxColumn1.DataSource = this.raceCrewsBindingSource4;
-            this.dataGridViewComboBoxColumn1.DisplayMember = "Crew";
-            this.dataGridViewComboBoxColumn1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.dataGridViewComboBoxColumn1.HeaderText = "Crew";
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            this.dataGridViewComboBoxColumn1.ReadOnly = true;
-            this.dataGridViewComboBoxColumn1.ValueMember = "Crew_ID";
-            this.dataGridViewComboBoxColumn1.Width = 880;
-            // 
-            // raceCrewsBindingSource4
-            // 
-            this.raceCrewsBindingSource4.DataMember = "RaceCrews";
-            this.raceCrewsBindingSource4.DataSource = this.rowingRaceTimerDataSet11;
             // 
             // tabPageResults
             // 
@@ -438,91 +361,13 @@
             this.dg_results.Size = new System.Drawing.Size(1194, 666);
             this.dg_results.TabIndex = 0;
             // 
-            // btn_end
-            // 
-            this.btn_end.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_end.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_end.Location = new System.Drawing.Point(1114, 21);
-            this.btn_end.Name = "btn_end";
-            this.btn_end.Size = new System.Drawing.Size(226, 59);
-            this.btn_end.TabIndex = 6;
-            this.btn_end.Text = "Finish (F10)";
-            this.btn_end.UseVisualStyleBackColor = true;
-            this.btn_end.Click += new System.EventHandler(this.btn_end_Click);
-            // 
-            // raceCrewsBindingSource1
-            // 
-            this.raceCrewsBindingSource1.DataMember = "RaceCrews";
-            this.raceCrewsBindingSource1.DataSource = this.rowingRaceTimerDataSet1;
-            // 
-            // rowingRaceTimerDataSet1
-            // 
-            this.rowingRaceTimerDataSet1.DataSetName = "RowingRaceTimerDataSet";
-            this.rowingRaceTimerDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // raceCrewsBindingSource2
-            // 
-            this.raceCrewsBindingSource2.DataMember = "RaceCrews";
-            this.raceCrewsBindingSource2.DataSource = this.rowingRaceTimerDataSet1;
-            // 
-            // raceCrewsTableAdapter1
-            // 
-            this.raceCrewsTableAdapter1.ClearBeforeFill = true;
-            // 
-            // raceCrewsBindingSource
-            // 
-            this.raceCrewsBindingSource.DataMember = "RaceCrews";
-            this.raceCrewsBindingSource.DataSource = this.rowingRaceTimerDataSet11;
-            this.raceCrewsBindingSource.CurrentChanged += new System.EventHandler(this.raceCrewsBindingSource_CurrentChanged);
-            // 
-            // raceCrewsTableAdapter2
-            // 
-            this.raceCrewsTableAdapter2.ClearBeforeFill = true;
-            // 
-            // rowingRaceTimerDataSet11BindingSource
-            // 
-            this.rowingRaceTimerDataSet11BindingSource.DataSource = this.rowingRaceTimerDataSet11;
-            this.rowingRaceTimerDataSet11BindingSource.Position = 0;
-            this.rowingRaceTimerDataSet11BindingSource.CurrentChanged += new System.EventHandler(this.rowingRaceTimerDataSet11BindingSource_CurrentChanged);
-            // 
-            // tabPageCrews
-            // 
-            this.tabPageCrews.Controls.Add(this.dg_crews);
-            this.tabPageCrews.Location = new System.Drawing.Point(4, 33);
-            this.tabPageCrews.Name = "tabPageCrews";
-            this.tabPageCrews.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCrews.Size = new System.Drawing.Size(1330, 678);
-            this.tabPageCrews.TabIndex = 3;
-            this.tabPageCrews.Text = "Crews";
-            this.tabPageCrews.UseVisualStyleBackColor = true;
-            // 
-            // dg_crews
-            // 
-            this.dg_crews.AllowUserToOrderColumns = true;
-            this.dg_crews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dg_crews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_crews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Crew_ID,
-            this.BoatNumber,
-            this.BoatAlpha,
-            this.Club,
-            this.BoatType2,
-            this.CrewName2,
-            this.Prognostic2});
-            this.dg_crews.Location = new System.Drawing.Point(6, 6);
-            this.dg_crews.Name = "dg_crews";
-            this.dg_crews.Size = new System.Drawing.Size(1318, 666);
-            this.dg_crews.TabIndex = 0;
-            // 
             // Race_ID
             // 
             this.Race_ID.HeaderText = "Race_ID";
             this.Race_ID.Name = "Race_ID";
             this.Race_ID.ReadOnly = true;
             this.Race_ID.Visible = false;
-            this.Race_ID.Width = 106;
+            this.Race_ID.Width = 75;
             // 
             // CrewName
             // 
@@ -611,6 +456,7 @@
             this.Division.Name = "Division";
             this.Division.ReadOnly = true;
             this.Division.Visible = false;
+            this.Division.Width = 69;
             // 
             // BoatType
             // 
@@ -619,57 +465,357 @@
             this.BoatType.ReadOnly = true;
             this.BoatType.Width = 115;
             // 
-            // Crew_ID
+            // tabPageCrews
             // 
-            this.Crew_ID.HeaderText = "Crew_ID";
-            this.Crew_ID.Name = "Crew_ID";
-            this.Crew_ID.Visible = false;
+            this.tabPageCrews.Controls.Add(this.dg_crews);
+            this.tabPageCrews.Location = new System.Drawing.Point(4, 33);
+            this.tabPageCrews.Name = "tabPageCrews";
+            this.tabPageCrews.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCrews.Size = new System.Drawing.Size(1330, 678);
+            this.tabPageCrews.TabIndex = 3;
+            this.tabPageCrews.Text = "Crews";
+            this.tabPageCrews.UseVisualStyleBackColor = true;
+            // 
+            // dg_crews
+            // 
+            this.dg_crews.AllowUserToOrderColumns = true;
+            this.dg_crews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_crews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_crews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CrewID,
+            this.BoatNumber,
+            this.BoatAlpha,
+            this.Club,
+            this.BoatType1,
+            this.CrewName1,
+            this.Prognostic1});
+            this.dg_crews.Location = new System.Drawing.Point(6, 6);
+            this.dg_crews.Name = "dg_crews";
+            this.dg_crews.Size = new System.Drawing.Size(1318, 666);
+            this.dg_crews.TabIndex = 0;
+            // 
+            // CrewID
+            // 
+            this.CrewID.HeaderText = "CrewID";
+            this.CrewID.Name = "CrewID";
+            this.CrewID.ReadOnly = true;
+            this.CrewID.Visible = false;
             // 
             // BoatNumber
             // 
-            this.BoatNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BoatNumber.DefaultCellStyle = dataGridViewCellStyle10;
-            this.BoatNumber.HeaderText = "Number";
+            this.BoatNumber.HeaderText = "Boat Number";
             this.BoatNumber.Name = "BoatNumber";
-            this.BoatNumber.Width = 104;
             // 
             // BoatAlpha
             // 
-            this.BoatAlpha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.BoatAlpha.HeaderText = "Alpha";
+            this.BoatAlpha.HeaderText = "Boat Alpha";
             this.BoatAlpha.Name = "BoatAlpha";
-            this.BoatAlpha.Width = 84;
             // 
             // Club
             // 
-            this.Club.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Club.HeaderText = "Club";
             this.Club.Name = "Club";
-            this.Club.Width = 74;
             // 
-            // BoatType2
+            // BoatType1
             // 
-            this.BoatType2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.BoatType2.HeaderText = "Type";
-            this.BoatType2.Name = "BoatType2";
-            this.BoatType2.Width = 78;
+            this.BoatType1.HeaderText = "Boat Type";
+            this.BoatType1.Name = "BoatType1";
             // 
-            // CrewName2
+            // CrewName1
             // 
-            this.CrewName2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.CrewName2.HeaderText = "Crew";
-            this.CrewName2.Name = "CrewName2";
-            this.CrewName2.Width = 79;
+            this.CrewName1.HeaderText = "Crew";
+            this.CrewName1.Name = "CrewName1";
             // 
-            // Prognostic2
+            // Prognostic1
             // 
-            this.Prognostic2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Prognostic2.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Prognostic2.HeaderText = "Prognostic";
-            this.Prognostic2.Name = "Prognostic2";
-            this.Prognostic2.Width = 124;
+            this.Prognostic1.HeaderText = "Prognostic";
+            this.Prognostic1.Name = "Prognostic1";
+            // 
+            // tabPagePrognostics
+            // 
+            this.tabPagePrognostics.Controls.Add(this.dgPrognostics);
+            this.tabPagePrognostics.Controls.Add(this.cmbGender);
+            this.tabPagePrognostics.Controls.Add(this.cmbDivision);
+            this.tabPagePrognostics.Controls.Add(this.label4);
+            this.tabPagePrognostics.Controls.Add(this.label3);
+            this.tabPagePrognostics.Controls.Add(this.label2);
+            this.tabPagePrognostics.Controls.Add(this.label1);
+            this.tabPagePrognostics.Controls.Add(this.cmbBoat);
+            this.tabPagePrognostics.Controls.Add(this.cmbDiscipline);
+            this.tabPagePrognostics.Location = new System.Drawing.Point(4, 33);
+            this.tabPagePrognostics.Name = "tabPagePrognostics";
+            this.tabPagePrognostics.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePrognostics.Size = new System.Drawing.Size(1330, 678);
+            this.tabPagePrognostics.TabIndex = 4;
+            this.tabPagePrognostics.Text = "Prognostics";
+            this.tabPagePrognostics.UseVisualStyleBackColor = true;
+            this.tabPagePrognostics.Click += new System.EventHandler(this.tabPagePrognostics_Click);
+            // 
+            // dgPrognostics
+            // 
+            this.dgPrognostics.AllowUserToAddRows = false;
+            this.dgPrognostics.AllowUserToDeleteRows = false;
+            this.dgPrognostics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgPrognostics.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgPrognostics.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPrognostics.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.P_Age,
+            this.P_Gender,
+            this.P_PrognosticScore});
+            this.dgPrognostics.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgPrognostics.Location = new System.Drawing.Point(38, 240);
+            this.dgPrognostics.Name = "dgPrognostics";
+            this.dgPrognostics.RowTemplate.Height = 35;
+            this.dgPrognostics.Size = new System.Drawing.Size(1086, 347);
+            this.dgPrognostics.TabIndex = 8;
+            // 
+            // P_Age
+            // 
+            this.P_Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.P_Age.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.P_Age.HeaderText = "Age";
+            this.P_Age.Name = "P_Age";
+            this.P_Age.ReadOnly = true;
+            // 
+            // P_Gender
+            // 
+            this.P_Gender.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.P_Gender.HeaderText = "Gender";
+            this.P_Gender.Name = "P_Gender";
+            this.P_Gender.ReadOnly = true;
+            this.P_Gender.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.P_Gender.Width = 80;
+            // 
+            // P_PrognosticScore
+            // 
+            this.P_PrognosticScore.HeaderText = "PrognosticScore";
+            this.P_PrognosticScore.Name = "P_PrognosticScore";
+            this.P_PrognosticScore.ReadOnly = true;
+            this.P_PrognosticScore.Width = 174;
+            // 
+            // cmbGender
+            // 
+            this.cmbGender.FormattingEnabled = true;
+            this.cmbGender.Location = new System.Drawing.Point(158, 191);
+            this.cmbGender.Name = "cmbGender";
+            this.cmbGender.Size = new System.Drawing.Size(249, 32);
+            this.cmbGender.TabIndex = 7;
+            this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.cmbGender_SelectedIndexChanged);
+            // 
+            // cmbDivision
+            // 
+            this.cmbDivision.FormattingEnabled = true;
+            this.cmbDivision.Location = new System.Drawing.Point(160, 132);
+            this.cmbDivision.Name = "cmbDivision";
+            this.cmbDivision.Size = new System.Drawing.Size(249, 32);
+            this.cmbDivision.TabIndex = 6;
+            this.cmbDivision.SelectedIndexChanged += new System.EventHandler(this.cmbDivision_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(51, 191);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 24);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Gender";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(50, 135);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 24);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Division";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(78, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 24);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Boat";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 24);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Discipline";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // cmbBoat
+            // 
+            this.cmbBoat.FormattingEnabled = true;
+            this.cmbBoat.Location = new System.Drawing.Point(160, 75);
+            this.cmbBoat.Name = "cmbBoat";
+            this.cmbBoat.Size = new System.Drawing.Size(249, 32);
+            this.cmbBoat.TabIndex = 1;
+            this.cmbBoat.SelectedIndexChanged += new System.EventHandler(this.cmbBoat_SelectedIndexChanged);
+            // 
+            // cmbDiscipline
+            // 
+            this.cmbDiscipline.FormattingEnabled = true;
+            this.cmbDiscipline.Location = new System.Drawing.Point(160, 22);
+            this.cmbDiscipline.Name = "cmbDiscipline";
+            this.cmbDiscipline.Size = new System.Drawing.Size(249, 32);
+            this.cmbDiscipline.TabIndex = 0;
+            this.cmbDiscipline.SelectedIndexChanged += new System.EventHandler(this.cmbDiscipline_SelectedIndexChanged);
+            // 
+            // btn_end
+            // 
+            this.btn_end.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_end.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_end.Location = new System.Drawing.Point(1114, 21);
+            this.btn_end.Name = "btn_end";
+            this.btn_end.Size = new System.Drawing.Size(226, 59);
+            this.btn_end.TabIndex = 6;
+            this.btn_end.Text = "Finish (F10)";
+            this.btn_end.UseVisualStyleBackColor = true;
+            this.btn_end.Click += new System.EventHandler(this.btn_end_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1362, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.maintainRacesToolStripMenuItem,
+            this.setCurrentRaceToolStripMenuItem,
+            this.clearResultsForCurrentRaceToolStripMenuItem,
+            this.openDatabaseToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // maintainRacesToolStripMenuItem
+            // 
+            this.maintainRacesToolStripMenuItem.Name = "maintainRacesToolStripMenuItem";
+            this.maintainRacesToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.maintainRacesToolStripMenuItem.Text = "Maintain Races (To do)";
+            this.maintainRacesToolStripMenuItem.Click += new System.EventHandler(this.maintainRacesToolStripMenuItem_Click);
+            // 
+            // setCurrentRaceToolStripMenuItem
+            // 
+            this.setCurrentRaceToolStripMenuItem.Name = "setCurrentRaceToolStripMenuItem";
+            this.setCurrentRaceToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.setCurrentRaceToolStripMenuItem.Text = "Set Current Race (To do)";
+            this.setCurrentRaceToolStripMenuItem.Click += new System.EventHandler(this.setCurrentRaceToolStripMenuItem_Click);
+            // 
+            // clearResultsForCurrentRaceToolStripMenuItem
+            // 
+            this.clearResultsForCurrentRaceToolStripMenuItem.Name = "clearResultsForCurrentRaceToolStripMenuItem";
+            this.clearResultsForCurrentRaceToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.clearResultsForCurrentRaceToolStripMenuItem.Text = "Clear Results for Current Race";
+            this.clearResultsForCurrentRaceToolStripMenuItem.Click += new System.EventHandler(this.clearResultsForCurrentRaceToolStripMenuItem_Click);
+            // 
+            // openDatabaseToolStripMenuItem
+            // 
+            this.openDatabaseToolStripMenuItem.Name = "openDatabaseToolStripMenuItem";
+            this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.openDatabaseToolStripMenuItem.Text = "Open Database";
+            this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.openDatabaseToolStripMenuItem_Click);
+            // 
+            // crewBindingSource
+            // 
+            this.crewBindingSource.DataMember = "Crew";
+            this.crewBindingSource.DataSource = this.rowingRaceTimerDataSet;
+            this.crewBindingSource.CurrentChanged += new System.EventHandler(this.crewBindingSource_CurrentChanged_1);
+            // 
+            // rowingRaceTimerDataSet
+            // 
+            this.rowingRaceTimerDataSet.DataSetName = "RowingRaceTimerDataSet";
+            this.rowingRaceTimerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // crewTableAdapter
+            // 
+            this.crewTableAdapter.ClearBeforeFill = true;
+            // 
+            // StartID
+            // 
+            this.StartID.HeaderText = "ID";
+            this.StartID.Name = "StartID";
+            this.StartID.Visible = false;
+            this.StartID.Width = 52;
+            // 
+            // StartNum
+            // 
+            this.StartNum.HeaderText = "No.";
+            this.StartNum.Name = "StartNum";
+            this.StartNum.ReadOnly = true;
+            this.StartNum.Width = 65;
+            // 
+            // TimeStart
+            // 
+            this.TimeStart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.TimeStart.HeaderText = "Time";
+            this.TimeStart.Name = "TimeStart";
+            this.TimeStart.ReadOnly = true;
+            this.TimeStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TimeStart.Width = 150;
+            // 
+            // CrewStart
+            // 
+            this.CrewStart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CrewStart.DataSource = this.crewBindingSource;
+            this.CrewStart.DisplayMember = "CrewName";
+            this.CrewStart.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.CrewStart.HeaderText = "Crew";
+            this.CrewStart.Name = "CrewStart";
+            this.CrewStart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CrewStart.ValueMember = "Crew_ID";
+            this.CrewStart.Width = 880;
+            // 
+            // FinishID
+            // 
+            this.FinishID.HeaderText = "FinishID";
+            this.FinishID.Name = "FinishID";
+            this.FinishID.Visible = false;
+            this.FinishID.Width = 103;
+            // 
+            // FinishNum
+            // 
+            this.FinishNum.HeaderText = "No.";
+            this.FinishNum.Name = "FinishNum";
+            this.FinishNum.ReadOnly = true;
+            this.FinishNum.Width = 65;
+            // 
+            // TimeFinish
+            // 
+            this.TimeFinish.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.TimeFinish.HeaderText = "Time";
+            this.TimeFinish.Name = "TimeFinish";
+            this.TimeFinish.ReadOnly = true;
+            this.TimeFinish.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TimeFinish.Width = 150;
+            // 
+            // CrewFinish
+            // 
+            this.CrewFinish.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CrewFinish.DataSource = this.crewBindingSource;
+            this.CrewFinish.DisplayMember = "CrewName";
+            this.CrewFinish.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.CrewFinish.HeaderText = "Crew";
+            this.CrewFinish.Name = "CrewFinish";
+            this.CrewFinish.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CrewFinish.ValueMember = "Crew_ID";
+            this.CrewFinish.Width = 880;
             // 
             // Main
             // 
@@ -680,6 +826,7 @@
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.lbl_Timer);
             this.Controls.Add(this.btn_StartTime);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Main";
@@ -689,20 +836,19 @@
             this.tabPageStart.ResumeLayout(false);
             this.tabPageStart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_starttime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet11)).EndInit();
             this.tabPageFinish.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dg_endtime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource4)).EndInit();
             this.tabPageResults.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dg_results)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raceCrewsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet11BindingSource)).EndInit();
             this.tabPageCrews.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dg_crews)).EndInit();
+            this.tabPagePrognostics.ResumeLayout(false);
+            this.tabPagePrognostics.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPrognostics)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.crewBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowingRaceTimerDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,30 +867,12 @@
         private System.Windows.Forms.DataGridView dg_endtime;
         private System.Windows.Forms.Button btn_end;
         private System.Windows.Forms.TabPage tabPageResults;
-        private RowingRaceTimerDataSet rowingRaceTimerDataSet;
-        private System.Windows.Forms.BindingSource raceCrewsBindingSource;
-        private RowingRaceTimerDataSetTableAdapters.RaceCrewsTableAdapter raceCrewsTableAdapter;
+        //private RowingRaceTimerDataSet rowingRaceTimerDataSet;
+        //private RowingRaceTimerDataSetTableAdapters.RaceCrewsTableAdapter raceCrewsTableAdapter;
         private System.Windows.Forms.DataGridView dg_results;
         private System.Windows.Forms.Button btn_loadresults;
-        private RowingRaceTimerDataSet rowingRaceTimerDataSet1;
-        private System.Windows.Forms.BindingSource raceCrewsBindingSource1;
-        private RowingRaceTimerDataSetTableAdapters.RaceCrewsTableAdapter raceCrewsTableAdapter1;
-        private System.Windows.Forms.BindingSource raceCrewsBindingSource2;
         private System.Windows.Forms.Button btn_exportcsv;
-        private RowingRaceTimerDataSet1 rowingRaceTimerDataSet11;
-        private RowingRaceTimerDataSet1TableAdapters.RaceCrewsTableAdapter raceCrewsTableAdapter2;
-        private System.Windows.Forms.BindingSource raceCrewsBindingSource3;
-        private System.Windows.Forms.BindingSource raceCrewsBindingSource4;
-        private System.Windows.Forms.BindingSource rowingRaceTimerDataSet11BindingSource;
         private System.Windows.Forms.Label lbl_starttime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FinishID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FinishNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StartID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StartNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Crew;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Button btn_report;
         private System.Windows.Forms.TabPage tabPageCrews;
@@ -761,12 +889,46 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Score;
         private System.Windows.Forms.DataGridViewTextBoxColumn Division;
         private System.Windows.Forms.DataGridViewTextBoxColumn BoatType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Crew_ID;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem maintainRacesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setCurrentRaceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearResultsForCurrentRaceToolStripMenuItem;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn boatNumberDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn boatAlphaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn clubDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn crewNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CrewID;
         private System.Windows.Forms.DataGridViewTextBoxColumn BoatNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn BoatAlpha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Club;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BoatType2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CrewName2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Prognostic2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BoatType1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CrewName1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prognostic1;
+        private System.Windows.Forms.ToolStripMenuItem openDatabaseToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPagePrognostics;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbBoat;
+        private System.Windows.Forms.ComboBox cmbDiscipline;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbGender;
+        private System.Windows.Forms.ComboBox cmbDivision;
+        private System.Windows.Forms.DataGridView dgPrognostics;
+        private System.Windows.Forms.DataGridViewComboBoxColumn P_Age;
+        private System.Windows.Forms.DataGridViewComboBoxColumn P_Gender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn P_PrognosticScore;
+        private RowingRaceTimerDataSet rowingRaceTimerDataSet;
+        private System.Windows.Forms.BindingSource crewBindingSource;
+        private RowingRaceTimerDataSetTableAdapters.CrewTableAdapter crewTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStart;
+        private System.Windows.Forms.DataGridViewComboBoxColumn CrewStart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FinishID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FinishNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeFinish;
+        private System.Windows.Forms.DataGridViewComboBoxColumn CrewFinish;
     }
 }

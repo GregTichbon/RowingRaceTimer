@@ -33,7 +33,7 @@ namespace RowingRaceTimer
                 OleDbCommand command = new OleDbCommand(queryString, connection);
                 command.CommandType = CommandType.Text;
                 OleDbDataReader dataReader = command.ExecuteReader();
-
+                 
                 if (dataReader.HasRows)
                 {
                     dataReader.Read();

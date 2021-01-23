@@ -16,14 +16,14 @@ namespace RowingRaceTimer {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Results : ReportClass {
+    public class ResultsNoStartandFinish : ReportClass {
         
-        public Results() {
+        public ResultsNoStartandFinish() {
         }
         
         public override string ResourceName {
             get {
-                return "Results.rpt";
+                return "ResultsNoStartandFinish.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace RowingRaceTimer {
         
         public override string FullResourceName {
             get {
-                return "RowingRaceTimer.Results.rpt";
+                return "RowingRaceTimer.ResultsNoStartandFinish.rpt";
             }
             set {
                 // Do nothing
@@ -95,20 +95,12 @@ namespace RowingRaceTimer {
                 return this.ReportDefinition.Sections[5];
             }
         }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Race_ID {
-            get {
-                return this.DataDefinition.ParameterFields[0];
-            }
-        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedResults : Component, ICachedReport {
+    public class CachedResultsNoStartandFinish : Component, ICachedReport {
         
-        public CachedResults() {
+        public CachedResultsNoStartandFinish() {
         }
         
         [Browsable(false)]
@@ -145,7 +137,7 @@ namespace RowingRaceTimer {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Results rpt = new Results();
+            ResultsNoStartandFinish rpt = new ResultsNoStartandFinish();
             rpt.Site = this.Site;
             return rpt;
         }

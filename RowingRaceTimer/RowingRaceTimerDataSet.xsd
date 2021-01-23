@@ -4,15 +4,18 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="RowingRaceTimerConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RowingRaceTimerConnectionString (Settings)" PropertyReference="ApplicationSettings.RowingRaceTimer.Properties.Settings.GlobalReference.Default.RowingRaceTimerConnectionString" Provider="System.Data.OleDb" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="RowingRaceTimerConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="RowingRaceTimerConnectionString1 (Settings)" PropertyReference="ApplicationSettings.RowingRaceTimer.Properties.Settings.GlobalReference.Default.RowingRaceTimerConnectionString1" Provider="System.Data.OleDb" />
         </Connections>
         <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="RaceCrewsTableAdapter" GeneratorDataComponentClassName="RaceCrewsTableAdapter" Name="RaceCrews" UserDataComponentName="RaceCrewsTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CrewTableAdapter" GeneratorDataComponentClassName="CrewTableAdapter" Name="Crew" UserDataComponentName="CrewTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="RowingRaceTimerConnectionString (Settings)" DbObjectName="RaceCrews" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="RowingRaceTimerConnectionString1 (Settings)" DbObjectName="Crew" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT Crew_ID, Crew FROM RaceCrews</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Crew.Crew_ID, [BoatAlpha] &amp; [BoatNumber] &amp; " " &amp; [club] &amp; " - " &amp; [crewname] AS CrewName
+FROM Crew
+WHERE (((Crew.Race_ID)=13))
+ORDER BY Crew.BoatAlpha, Crew.BoatNumber</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -20,7 +23,7 @@
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="Crew_ID" DataSetColumn="Crew_ID" />
-              <Mapping SourceColumn="Crew" DataSetColumn="Crew" />
+              <Mapping SourceColumn="CrewName" DataSetColumn="CrewName" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -32,11 +35,11 @@
   <xs:element name="RowingRaceTimerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="RowingRaceTimerDataSet" msprop:Generator_UserDSName="RowingRaceTimerDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="RaceCrews" msprop:Generator_TableClassName="RaceCrewsDataTable" msprop:Generator_TableVarName="tableRaceCrews" msprop:Generator_TablePropName="RaceCrews" msprop:Generator_RowDeletingName="RaceCrewsRowDeleting" msprop:Generator_RowChangingName="RaceCrewsRowChanging" msprop:Generator_RowEvHandlerName="RaceCrewsRowChangeEventHandler" msprop:Generator_RowDeletedName="RaceCrewsRowDeleted" msprop:Generator_UserTableName="RaceCrews" msprop:Generator_RowChangedName="RaceCrewsRowChanged" msprop:Generator_RowEvArgName="RaceCrewsRowChangeEvent" msprop:Generator_RowClassName="RaceCrewsRow">
+        <xs:element name="Crew" msprop:Generator_TableClassName="CrewDataTable" msprop:Generator_TableVarName="tableCrew" msprop:Generator_TablePropName="Crew" msprop:Generator_RowDeletingName="CrewRowDeleting" msprop:Generator_RowChangingName="CrewRowChanging" msprop:Generator_RowEvHandlerName="CrewRowChangeEventHandler" msprop:Generator_RowDeletedName="CrewRowDeleted" msprop:Generator_UserTableName="Crew" msprop:Generator_RowChangedName="CrewRowChanged" msprop:Generator_RowEvArgName="CrewRowChangeEvent" msprop:Generator_RowClassName="CrewRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Crew_ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnCrew_ID" msprop:Generator_ColumnPropNameInRow="Crew_ID" msprop:Generator_ColumnPropNameInTable="Crew_IDColumn" msprop:Generator_UserColumnName="Crew_ID" type="xs:int" />
-              <xs:element name="Crew" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCrew" msprop:Generator_ColumnPropNameInRow="Crew" msprop:Generator_ColumnPropNameInTable="CrewColumn" msprop:Generator_UserColumnName="Crew" minOccurs="0">
+              <xs:element name="CrewName" msprop:Generator_ColumnVarNameInTable="columnCrewName" msprop:Generator_ColumnPropNameInRow="CrewName" msprop:Generator_ColumnPropNameInTable="CrewNameColumn" msprop:Generator_UserColumnName="CrewName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="536870910" />
@@ -49,7 +52,7 @@
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:RaceCrews" />
+      <xs:selector xpath=".//mstns:Crew" />
       <xs:field xpath="mstns:Crew_ID" />
     </xs:unique>
   </xs:element>
