@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="RowingRaceTimerConnectionString1 (Settings)" DbObjectName="Crew" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT Crew.Crew_ID, [BoatAlpha] &amp; [BoatNumber] &amp; " " &amp; [club] &amp; " - " &amp; [crewname] AS CrewName
+                    <CommandText>SELECT Crew.Crew_ID, [BoatAlpha] &amp; [BoatNumber] &amp; " " &amp; [club] &amp; " - " &amp; [crew].[crew] AS CrewName
 FROM Crew
 WHERE (((Crew.Race_ID)=13))
 ORDER BY Crew.BoatAlpha, Crew.BoatNumber</CommandText>
@@ -23,7 +23,7 @@ ORDER BY Crew.BoatAlpha, Crew.BoatNumber</CommandText>
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="Crew_ID" DataSetColumn="Crew_ID" />
-              <Mapping SourceColumn="CrewName" DataSetColumn="CrewName" />
+              <Mapping SourceColumn="CrewName" DataSetColumn="Crew" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -35,11 +35,11 @@ ORDER BY Crew.BoatAlpha, Crew.BoatNumber</CommandText>
   <xs:element name="RowingRaceTimerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="RowingRaceTimerDataSet" msprop:Generator_UserDSName="RowingRaceTimerDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Crew" msprop:Generator_TableClassName="CrewDataTable" msprop:Generator_TableVarName="tableCrew" msprop:Generator_TablePropName="Crew" msprop:Generator_RowDeletingName="CrewRowDeleting" msprop:Generator_RowChangingName="CrewRowChanging" msprop:Generator_RowEvHandlerName="CrewRowChangeEventHandler" msprop:Generator_RowDeletedName="CrewRowDeleted" msprop:Generator_UserTableName="Crew" msprop:Generator_RowChangedName="CrewRowChanged" msprop:Generator_RowEvArgName="CrewRowChangeEvent" msprop:Generator_RowClassName="CrewRow">
+        <xs:element name="Crew" msprop:Generator_TableClassName="CrewDataTable" msprop:Generator_TableVarName="tableCrew" msprop:Generator_RowChangedName="CrewRowChanged" msprop:Generator_TablePropName="Crew" msprop:Generator_RowDeletingName="CrewRowDeleting" msprop:Generator_RowChangingName="CrewRowChanging" msprop:Generator_RowEvHandlerName="CrewRowChangeEventHandler" msprop:Generator_RowDeletedName="CrewRowDeleted" msprop:Generator_RowClassName="CrewRow" msprop:Generator_UserTableName="Crew" msprop:Generator_RowEvArgName="CrewRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Crew_ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnCrew_ID" msprop:Generator_ColumnPropNameInRow="Crew_ID" msprop:Generator_ColumnPropNameInTable="Crew_IDColumn" msprop:Generator_UserColumnName="Crew_ID" type="xs:int" />
-              <xs:element name="CrewName" msprop:Generator_ColumnVarNameInTable="columnCrewName" msprop:Generator_ColumnPropNameInRow="CrewName" msprop:Generator_ColumnPropNameInTable="CrewNameColumn" msprop:Generator_UserColumnName="CrewName" minOccurs="0">
+              <xs:element name="Crew" msprop:Generator_ColumnVarNameInTable="columnCrew" msprop:Generator_ColumnPropNameInRow="Crew" msprop:Generator_ColumnPropNameInTable="CrewColumn" msprop:Generator_UserColumnName="Crew" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="536870910" />

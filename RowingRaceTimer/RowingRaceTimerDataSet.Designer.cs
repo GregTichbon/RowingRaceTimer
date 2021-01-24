@@ -281,7 +281,7 @@ namespace RowingRaceTimer {
             
             private global::System.Data.DataColumn columnCrew_ID;
             
-            private global::System.Data.DataColumn columnCrewName;
+            private global::System.Data.DataColumn columnCrew;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -326,9 +326,9 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn CrewNameColumn {
+            public global::System.Data.DataColumn CrewColumn {
                 get {
-                    return this.columnCrewName;
+                    return this.columnCrew;
                 }
             }
             
@@ -369,11 +369,11 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CrewRow AddCrewRow(string CrewName) {
+            public CrewRow AddCrewRow(string Crew) {
                 CrewRow rowCrewRow = ((CrewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        CrewName};
+                        Crew};
                 rowCrewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCrewRow);
                 return rowCrewRow;
@@ -404,7 +404,7 @@ namespace RowingRaceTimer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnCrew_ID = base.Columns["Crew_ID"];
-                this.columnCrewName = base.Columns["CrewName"];
+                this.columnCrew = base.Columns["Crew"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -412,8 +412,8 @@ namespace RowingRaceTimer {
             private void InitClass() {
                 this.columnCrew_ID = new global::System.Data.DataColumn("Crew_ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCrew_ID);
-                this.columnCrewName = new global::System.Data.DataColumn("CrewName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCrewName);
+                this.columnCrew = new global::System.Data.DataColumn("Crew", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCrew);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnCrew_ID}, true));
                 this.columnCrew_ID.AutoIncrement = true;
@@ -421,7 +421,7 @@ namespace RowingRaceTimer {
                 this.columnCrew_ID.AutoIncrementStep = -1;
                 this.columnCrew_ID.AllowDBNull = false;
                 this.columnCrew_ID.Unique = true;
-                this.columnCrewName.MaxLength = 536870910;
+                this.columnCrew.MaxLength = 536870910;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -575,30 +575,30 @@ namespace RowingRaceTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string CrewName {
+            public string Crew {
                 get {
                     try {
-                        return ((string)(this[this.tableCrew.CrewNameColumn]));
+                        return ((string)(this[this.tableCrew.CrewColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CrewName\' in table \'Crew\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Crew\' in table \'Crew\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCrew.CrewNameColumn] = value;
+                    this[this.tableCrew.CrewColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsCrewNameNull() {
-                return this.IsNull(this.tableCrew.CrewNameColumn);
+            public bool IsCrewNull() {
+                return this.IsNull(this.tableCrew.CrewColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetCrewNameNull() {
-                this[this.tableCrew.CrewNameColumn] = global::System.Convert.DBNull;
+            public void SetCrewNull() {
+                this[this.tableCrew.CrewColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -762,7 +762,7 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Crew";
             tableMapping.ColumnMappings.Add("Crew_ID", "Crew_ID");
-            tableMapping.ColumnMappings.Add("CrewName", "CrewName");
+            tableMapping.ColumnMappings.Add("CrewName", "Crew");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -779,9 +779,9 @@ namespace RowingRaceTimer.RowingRaceTimerDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Crew.Crew_ID, [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" - \" & [crewnam" +
-                "e] AS CrewName\r\nFROM Crew\r\nWHERE (((Crew.Race_ID)=13))\r\nORDER BY Crew.BoatAlpha," +
-                " Crew.BoatNumber";
+            this._commandCollection[0].CommandText = "SELECT Crew.Crew_ID, [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" - \" & [crew].[" +
+                "crew] AS CrewName\r\nFROM Crew\r\nWHERE (((Crew.Race_ID)=13))\r\nORDER BY Crew.BoatAlp" +
+                "ha, Crew.BoatNumber";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

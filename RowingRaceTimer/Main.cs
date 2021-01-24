@@ -36,7 +36,10 @@ namespace RowingRaceTimer
 
         private void Main_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'rowingRaceTimerDataSet.Crew' table. You can move, or remove it, as needed.
+
+            MessageBox.Show("Change Database: Table: Crews, Column: CrewName to Crew, and all relating queries etc");
+
+            // TODO: This line of code loads data into the 'rowingRaceTimerDataSet.Crew' table. 
             this.crewTableAdapter.Fill(this.rowingRaceTimerDataSet.Crew);
 
             /*
@@ -59,12 +62,6 @@ namespace RowingRaceTimer
             dgPrognostics.Columns.Add(cmb);
             //dgPrognostics.Columns[0].
 
-            dgPrognostics.Rows.Add(1);
-
-
-
-            //this.crewTableAdapter.Fill(this.rowingRaceTimerDataSet.Crew);  
-
 
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
@@ -82,7 +79,7 @@ namespace RowingRaceTimer
                 }
             }
 
-            string sql = "SELECT Crew.Crew_ID, [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" - \" & [crewname] AS CrewName FROM Crew WHERE Crew.Race_ID = " + race + " ORDER BY Crew.BoatAlpha, Crew.BoatNumber";
+            string sql = "SELECT Crew.Crew_ID, [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" - \" & [crew] AS Crew FROM Crew WHERE Crew.Race_ID = " + race + " ORDER BY Crew.BoatAlpha, Crew.BoatNumber";
             DataTable dt = this.GetDataTable(sql);
             DataGridViewComboBoxColumn dcombostart;
             dcombostart = (DataGridViewComboBoxColumn)dg_starttime.Columns["CrewStart"];
@@ -216,7 +213,7 @@ namespace RowingRaceTimer
                 OleDbDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    dg_crews.Rows.Add(dataReader["crew_id"], dataReader["boatnumber"], dataReader["boatalpha"], dataReader["club"], dataReader["boattype"], dataReader["crewname"], dataReader["prognostic"]);
+                    dg_crews.Rows.Add(dataReader["crew_id"], dataReader["boatnumber"], dataReader["boatalpha"], dataReader["club"], dataReader["boattype"], dataReader["crew"], dataReader["prognostic"]);
                     int newrow = dg_crews.Rows.Count - 2;
                 }
             }
@@ -244,17 +241,14 @@ namespace RowingRaceTimer
                 OleDbDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    dg_crews.Rows.Add(dataReader["crew_id"], dataReader["boatnumber"], dataReader["boatalpha"], dataReader["club"], dataReader["boattype"], dataReader["crewname"], dataReader["prognostic"]);
+                    dg_crews.Rows.Add(dataReader["crew_id"], dataReader["boatnumber"], dataReader["boatalpha"], dataReader["club"], dataReader["boattype"], dataReader["crew"], dataReader["prognostic"]);
                     int newrow = dg_crews.Rows.Count - 2;
                 }
                 */
             }
         }
 
-
-
-
-        private void btn_StartTime_Click(object sender, EventArgs e)
+       private void btn_StartTime_Click(object sender, EventArgs e)
         {
             if (singlestart)
             {
@@ -410,7 +404,61 @@ namespace RowingRaceTimer
             }
         }
 
-        private void dg_starttime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dg_crews_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            int i = e.ColumnIndex;
+            string v = e.FormattedValue.ToString();
+            bool success = true;
+
+            if ((i == 1 && !(Int32.TryParse(v, out int x1))) || (i == 6 && !(Int32.TryParse(v, out int x2))))
+            {
+                success = false;
+            }
+            if (!(success))
+            {
+                MessageBox.Show("Invalid Data");
+                e.Cancel = true;
+            }
+
+        }
+        private void dg_crews_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            /* 0 Crew ID                        
+             * 1 Boat Number  Int                   BoatNumber
+             * 2 Boat Alpha   Single Char           BoatAlpha
+             * 3 Club                               Club
+             * 4 Boat Type                          BoatType
+             * 5 Crew                               Crew
+             * 6 Prognostic   Int                   Prognostic
+             * 7 Notes (to do)                      Notes
+            */
+
+            int i = e.ColumnIndex;
+            string v = dg_crews.Rows[e.RowIndex].Cells[i].Value.ToString();
+
+            string dbname = dg_crews.Columns[i].HeaderText.Replace(" ", "");
+
+            string crew_id = dg_crews.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            {
+                connection.Open();
+                string queryString = "update [crew] set [" + dbname + "] = \"" + v + "\" where crew_ID = " + crew_id;
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                //command.Parameters.Add("@crew_id", OleDbType.BigInt);
+                //command.Parameters[0].Value = crew_id;
+
+                //command.Parameters.Add("@starttime_id", OleDbType.BigInt);
+                //command.Parameters[1].Value = time_id;
+
+                command.CommandType = CommandType.Text;
+                command.ExecuteNonQuery();
+            }
+        }
+
+  
+
+    private void dg_starttime_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 3)
             {
@@ -576,8 +624,8 @@ namespace RowingRaceTimer
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 connection.Open();
-                //string crewformat = "Right(\"0\" & [Boatnumber],2) & \" \" & [Club].[code]+\" \"+[crewname]";
-                string crewformat = " [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" (\" & [crewname] & \")\"";
+                //string crewformat = "Right(\"0\" & [Boatnumber],2) & \" \" & [Club].[code]+\" \"+[crew]";
+                string crewformat = " [BoatAlpha] & [BoatNumber] & \" \" & [club] & \" (\" & [crew] & \")\"";
 
                 if (singlestart)
                 {
@@ -805,10 +853,6 @@ namespace RowingRaceTimer
 
 
                     }
-
-
-
-
                 }
             }
         }
@@ -929,6 +973,7 @@ namespace RowingRaceTimer
         {
 
         }
+        DataTable dtboats = new DataTable();
 
         public void refreshprognosticdata()
         {
@@ -954,33 +999,40 @@ namespace RowingRaceTimer
           }
         public void refreshprognosticboat(int discipline_ctr)
         {
+            //cmbDivision.Items.Clear();
+            //cmbGender.Items.Clear();
+            cmbDivision.DataSource = null;
+            cmbGender.DataSource = null;
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 connection.Open();
-                string queryString = @"SELECT Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat
+                string queryString = @"SELECT Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat, Prognostic_Boat.Seats
                                 FROM Prognostic_Prognostic INNER JOIN Prognostic_Boat ON Prognostic_Prognostic.Boat_CTR = Prognostic_Boat.Boat_CTR
                                 WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @"))
-                                GROUP BY Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat, Prognostic_Boat.Sequence
+                                GROUP BY Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat, Prognostic_Boat.Sequence, Prognostic_Boat.Seats
                                 ORDER BY Prognostic_Boat.Sequence";
 
                 OleDbCommand command = new OleDbCommand(queryString, connection);
                 command.CommandType = CommandType.Text;
                 OleDbDataAdapter sda = new OleDbDataAdapter(command);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+                //DataTable dt = new DataTable();
+                dtboats.Clear();
+                sda.Fill(dtboats);
 
                 DataRow dr;
-                dr = dt.NewRow();
+                dr = dtboats.NewRow();
                 dr.ItemArray = new object[] { 0, "--Select Boat--" };
-                dt.Rows.InsertAt(dr, 0);
+                dtboats.Rows.InsertAt(dr, 0);
                 cmbBoat.ValueMember = "boat_ctr";
                 cmbBoat.DisplayMember = "boat";
-                cmbBoat.DataSource = dt;
+                cmbBoat.DataSource = dtboats;
             }
         }
 
         public void refreshprognosticdivision(int discipline_ctr, int boat_ctr)
         {
+            //cmbGender.Items.Clear();
+            cmbGender.DataSource = null;
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 connection.Open();
@@ -1037,9 +1089,11 @@ WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Pr
                 OleDbCommand command = new OleDbCommand(queryString, connection);
                 command.CommandType = CommandType.Text;
                 OleDbDataReader dataReader = command.ExecuteReader();
-                if (dataReader.HasRows) { 
-                dataReader.Read();
-                MessageBox.Show(dataReader["PrognosticTime"].ToString());
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    lbl_prognostic.Text = dataReader["PrognosticTime"].ToString();
+
                 }
             }
 
@@ -1051,7 +1105,8 @@ WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Pr
 
         private void cmbDiscipline_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDiscipline.SelectedValue.ToString() != null)
+            lbl_prognostic.Text = "";
+            if (cmbDiscipline.SelectedValue.ToString() != "0")
             {
                 int discipline_ctr = Convert.ToInt32(cmbDiscipline.SelectedValue.ToString());
                 refreshprognosticboat(discipline_ctr);
@@ -1059,8 +1114,9 @@ WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Pr
         }
         private void cmbBoat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string x = cmbBoat.SelectedValue.ToString();
-            if (cmbBoat.SelectedValue.ToString() != "")
+            lbl_prognostic.Text = "";
+            if (cmbBoat.SelectedValue != null && cmbBoat.SelectedValue.ToString() != "0")
+            //if (cmbBoat.SelectedValue != null)
             {
                 int discipline_ctr = Convert.ToInt32(cmbDiscipline.SelectedValue.ToString());
                 int boat_ctr = Convert.ToInt32(cmbBoat.SelectedValue.ToString());
@@ -1069,7 +1125,9 @@ WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Pr
         }
         private void cmbDivision_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDivision.SelectedValue.ToString() != "")
+            lbl_prognostic.Text = "";
+            if (cmbDivision.SelectedValue != null && cmbDivision.SelectedValue.ToString() != "0")
+            //if (cmbDivision.SelectedValue!=null)
             {
                 int discipline_ctr = Convert.ToInt32(cmbDiscipline.SelectedValue.ToString());
                 int boat_ctr = Convert.ToInt32(cmbBoat.SelectedValue.ToString());
@@ -1080,13 +1138,30 @@ WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Pr
 
         private void cmbGender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbGender.SelectedValue.ToString() != "")
+            dgPrognostics.Rows.Clear();
+            lbl_prognostic.Text = "";
+            if (cmbGender.SelectedValue != null && cmbGender.SelectedValue.ToString() != "0")
             {
+                //dgPrognostics.Refresh();
+
                 int discipline_ctr = Convert.ToInt32(cmbDiscipline.SelectedValue.ToString());
                 int boat_ctr = Convert.ToInt32(cmbBoat.SelectedValue.ToString());
                 int division_ctr = Convert.ToInt32(cmbDivision.SelectedValue.ToString());
                 int gender_ctr = Convert.ToInt32(cmbGender.SelectedValue.ToString());
                 refreshprognosticscores(discipline_ctr, boat_ctr, division_ctr, gender_ctr);
+
+                DataRow[] foundRows;
+
+                // Use the Select method to find all rows matching the filter.
+                foundRows = dtboats.Select("boat_ctr = " + boat_ctr);
+                int seats = (int)foundRows[0]["Seats"];
+                if (seats > 1)
+                {
+                    for (int i = 1; i <= seats; i++)
+                    {
+                        dgPrognostics.Rows.Add();
+                    }
+                }
             }
         }
 
@@ -1096,6 +1171,11 @@ WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Pr
         }
 
         private void crewBindingSource_CurrentChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
