@@ -977,6 +977,7 @@ namespace RowingRaceTimer
 
         public void refreshprognosticdata()
         {
+             
             using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 connection.Open();
@@ -996,104 +997,117 @@ namespace RowingRaceTimer
                 cmbDiscipline.DisplayMember = "discipline";
                 cmbDiscipline.DataSource = dt;
             }
-          }
+ 
+        }
         public void refreshprognosticboat(int discipline_ctr)
         {
-            //cmbDivision.Items.Clear();
-            //cmbGender.Items.Clear();
-            cmbDivision.DataSource = null;
-            cmbGender.DataSource = null;
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            if (1 == 2)
             {
-                connection.Open();
-                string queryString = @"SELECT Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat, Prognostic_Boat.Seats
+                //cmbDivision.Items.Clear();
+                //cmbGender.Items.Clear();
+                cmbDivision.DataSource = null;
+                cmbGender.DataSource = null;
+                using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                {
+                    connection.Open();
+                    string queryString = @"SELECT Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat, Prognostic_Boat.Seats
                                 FROM Prognostic_Prognostic INNER JOIN Prognostic_Boat ON Prognostic_Prognostic.Boat_CTR = Prognostic_Boat.Boat_CTR
                                 WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @"))
                                 GROUP BY Prognostic_Boat.Boat_CTR, Prognostic_Boat.Boat, Prognostic_Boat.Sequence, Prognostic_Boat.Seats
                                 ORDER BY Prognostic_Boat.Sequence";
 
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-                command.CommandType = CommandType.Text;
-                OleDbDataAdapter sda = new OleDbDataAdapter(command);
-                //DataTable dt = new DataTable();
-                dtboats.Clear();
-                sda.Fill(dtboats);
+                    OleDbCommand command = new OleDbCommand(queryString, connection);
+                    command.CommandType = CommandType.Text;
+                    OleDbDataAdapter sda = new OleDbDataAdapter(command);
+                    //DataTable dt = new DataTable();
+                    dtboats.Clear();
+                    sda.Fill(dtboats);
 
-                DataRow dr;
-                dr = dtboats.NewRow();
-                dr.ItemArray = new object[] { 0, "--Select Boat--" };
-                dtboats.Rows.InsertAt(dr, 0);
-                cmbBoat.ValueMember = "boat_ctr";
-                cmbBoat.DisplayMember = "boat";
-                cmbBoat.DataSource = dtboats;
+                    DataRow dr;
+                    dr = dtboats.NewRow();
+                    dr.ItemArray = new object[] { 0, "--Select Boat--" };
+                    dtboats.Rows.InsertAt(dr, 0);
+                    cmbBoat.ValueMember = "boat_ctr";
+                    cmbBoat.DisplayMember = "boat";
+                    cmbBoat.DataSource = dtboats;
+                }
             }
         }
 
         public void refreshprognosticdivision(int discipline_ctr, int boat_ctr)
         {
-            //cmbGender.Items.Clear();
-            cmbGender.DataSource = null;
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            if (1 == 2)
             {
-                connection.Open();
-                string queryString = @"SELECT Prognostic_Division.Division_CTR, Prognostic_Division.Division FROM Prognostic_Prognostic INNER JOIN Prognostic_Division ON Prognostic_Prognostic.Division_CTR = Prognostic_Division.Division_CTR WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Prognostic_Prognostic.Boat_CTR)=" + boat_ctr + @")) GROUP BY Prognostic_Division.Division_CTR, Prognostic_Division.Division, Prognostic_Division.Sequence ORDER BY Prognostic_Division.Sequence";
-                //ORDER BY Prognostic_Division.Sequence";
+                //cmbGender.Items.Clear();
+                cmbGender.DataSource = null;
+                using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                {
+                    connection.Open();
+                    string queryString = @"SELECT Prognostic_Division.Division_CTR, Prognostic_Division.Division FROM Prognostic_Prognostic INNER JOIN Prognostic_Division ON Prognostic_Prognostic.Division_CTR = Prognostic_Division.Division_CTR WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Prognostic_Prognostic.Boat_CTR)=" + boat_ctr + @")) GROUP BY Prognostic_Division.Division_CTR, Prognostic_Division.Division, Prognostic_Division.Sequence ORDER BY Prognostic_Division.Sequence";
+                    //ORDER BY Prognostic_Division.Sequence";
 
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-                command.CommandType = CommandType.Text;
-                OleDbDataAdapter sda = new OleDbDataAdapter(command);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+                    OleDbCommand command = new OleDbCommand(queryString, connection);
+                    command.CommandType = CommandType.Text;
+                    OleDbDataAdapter sda = new OleDbDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
 
-                DataRow dr;
-                dr = dt.NewRow();
-                dr.ItemArray = new object[] { 0, "--Select Division--" };
-                dt.Rows.InsertAt(dr, 0);
-                cmbDivision.ValueMember = "Division_CTR";
-                cmbDivision.DisplayMember = "Division";
-                cmbDivision.DataSource = dt;
+                    DataRow dr;
+                    dr = dt.NewRow();
+                    dr.ItemArray = new object[] { 0, "--Select Division--" };
+                    dt.Rows.InsertAt(dr, 0);
+                    cmbDivision.ValueMember = "Division_CTR";
+                    cmbDivision.DisplayMember = "Division";
+                    cmbDivision.DataSource = dt;
+                }
             }
         }
         public void refreshprognosticgender(int discipline_ctr, int boat_ctr, int division_ctr)
         {
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            if (1 == 2)
             {
-                connection.Open();
-                string queryString = @"SELECT Prognostic_Gender.Gender_Ctr, Prognostic_Gender.Gender FROM Prognostic_Gender INNER JOIN Prognostic_Prognostic ON Prognostic_Gender.Gender_Ctr = Prognostic_Prognostic.Gender_CTR WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Prognostic_Prognostic.Boat_CTR)=" + boat_ctr + @") AND ((Prognostic_Prognostic.Division_CTR)=" + division_ctr + @")) GROUP BY Prognostic_Gender.Gender_Ctr, Prognostic_Gender.Gender, Prognostic_Gender.Sequence ORDER BY Prognostic_Gender.Sequence";
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-                command.CommandType = CommandType.Text;
-                OleDbDataAdapter sda = new OleDbDataAdapter(command);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+                using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                {
+                    connection.Open();
+                    string queryString = @"SELECT Prognostic_Gender.Gender_Ctr, Prognostic_Gender.Gender FROM Prognostic_Gender INNER JOIN Prognostic_Prognostic ON Prognostic_Gender.Gender_Ctr = Prognostic_Prognostic.Gender_CTR WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Prognostic_Prognostic.Boat_CTR)=" + boat_ctr + @") AND ((Prognostic_Prognostic.Division_CTR)=" + division_ctr + @")) GROUP BY Prognostic_Gender.Gender_Ctr, Prognostic_Gender.Gender, Prognostic_Gender.Sequence ORDER BY Prognostic_Gender.Sequence";
+                    OleDbCommand command = new OleDbCommand(queryString, connection);
+                    command.CommandType = CommandType.Text;
+                    OleDbDataAdapter sda = new OleDbDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
 
-                DataRow dr;
-                dr = dt.NewRow();
-                dr.ItemArray = new object[] { 0, "--Select Gender--" };
-                dt.Rows.InsertAt(dr, 0);
-                cmbGender.ValueMember = "gender_ctr";
-                cmbGender.DisplayMember = "gender";
-                cmbGender.DataSource = dt;
+                    DataRow dr;
+                    dr = dt.NewRow();
+                    dr.ItemArray = new object[] { 0, "--Select Gender--" };
+                    dt.Rows.InsertAt(dr, 0);
+                    cmbGender.ValueMember = "gender_ctr";
+                    cmbGender.DisplayMember = "gender";
+                    cmbGender.DataSource = dt;
+                }
             }
         }
 
 
         public void refreshprognosticscores(int discipline_ctr, int boat_ctr, int division_ctr, int gender_ctr)
         {
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            if (1 == 2)
             {
-                connection.Open();
-                string queryString = @"SELECT Prognostic_Prognostic.Prognostic_CTR, Prognostic_Prognostic.Description, Prognostic_Prognostic.Code, Prognostic_Boat.Seats, Prognostic_Boat.Coxed, Prognostic_Prognostic.PrognosticTime
+                using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+                {
+                    connection.Open();
+                    string queryString = @"SELECT Prognostic_Prognostic.Prognostic_CTR, Prognostic_Prognostic.Description, Prognostic_Prognostic.Code, Prognostic_Boat.Seats, Prognostic_Boat.Coxed, Prognostic_Prognostic.PrognosticTime
 FROM Prognostic_Boat INNER JOIN Prognostic_Prognostic ON Prognostic_Boat.Boat_CTR = Prognostic_Prognostic.Boat_CTR
 WHERE (((Prognostic_Prognostic.Discipline_CTR)=" + discipline_ctr + @") AND ((Prognostic_Prognostic.Boat_CTR)=" + boat_ctr + @") AND ((Prognostic_Prognostic.Division_CTR)=" + division_ctr + @") AND ((Prognostic_Prognostic.Gender_CTR)=" + gender_ctr + @"))";
 
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-                command.CommandType = CommandType.Text;
-                OleDbDataReader dataReader = command.ExecuteReader();
-                if (dataReader.HasRows)
-                {
-                    dataReader.Read();
-                    lbl_prognostic.Text = dataReader["PrognosticTime"].ToString();
+                    OleDbCommand command = new OleDbCommand(queryString, connection);
+                    command.CommandType = CommandType.Text;
+                    OleDbDataReader dataReader = command.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        dataReader.Read();
+                        lbl_prognostic.Text = dataReader["PrognosticTime"].ToString();
 
+                    }
                 }
             }
 
